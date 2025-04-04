@@ -9,3 +9,5 @@ export const SKILLS = [
   "Three.js / Drei / Spring / Motion",
   "Docker",
 ]
+
+export const START_JOB_DATE = "2022-01-01"

@@ -1,6 +1,7 @@
 {
   "Dock": {
     "home": "Главная",
+    "stack": "Стек",
     "send-email": "Отправить Email",
     "theme": "Тема",
     "locale": "Язык"
@@ -9,8 +10,19 @@
     "front-end": "Front-End",
     "development": "Разработка",
     "welcome": "Добро пожаловать!",
-    "iam": "Привет! Я Пермяков Виталий",
-    "experience": "Front-End Разработчик с {yearsSinceStartJob}-летним опытом.",
+    "iam": {
+      "full": "Привет! Я Пермяков Виталий",
+      "hi": "Привет!",
+      "i": "Я",
+      "am": "Пермяков Виталий"
+    },
+    "experience": {
+      "full": "Front-End Разработчик с {yearsSinceStartJob}-летним опытом.",
+      "front-end": "Front-End",
+      "developer": "Разработчик c",
+      "yearsCount": "{yearsSinceStartJob}",
+      "years": "летним опытом."
+    },
     "user": "ПЕРМЯКОВ ВИТАЛИЙ"
   }
 }

@@ -1,6 +1,6 @@
 "use client"
 
-import { HouseIcon, MailIcon } from 'lucide-react';
+import { BlocksIcon, HouseIcon, MailIcon } from 'lucide-react';
 import React from 'react'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip';
 import { Dock, DockIcon } from '../magicui/dock';
@@ -40,6 +40,7 @@ export default function DockProvider({
   const DATA = {
     navbar: [
       { href: "/", icon: HouseIcon, label: t("home") },
+      { href: "/#stack", icon: BlocksIcon, label: t("stack") },
     ],
     contact: {
       social: {

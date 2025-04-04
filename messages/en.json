@@ -1,6 +1,7 @@
 {
   "Dock": {
     "home": "Home",
+    "stack": "Стэк",
     "send-email": "Send Email",
     "theme": "Theme",
     "locale": "Locale"
@@ -9,8 +10,19 @@
     "front-end": "Front-End",
     "development": "Development",
     "welcome": "Welcome!",
-    "iam": "Hi! I am Vitaly Permyakov",
-    "experience": "Front-End Dev with {yearsSinceStartJob} years of experience.",
+    "iam": {
+      "full": "Hi! I am Vitaly Permyakov",
+      "hi": "Hi!",
+      "i": "I am",
+      "am": "Vitaly Permyakov"
+    },
+    "experience": {
+      "full": "Front-End Dev with {yearsSinceStartJob} years of experience.",
+      "front-end": "Front-End",
+      "developer": "Dev with",
+      "yearsCount": "{yearsSinceStartJob}",
+      "years": "years of experience."
+    },
     "user": "PERMYAKOV VITALY"
   }
 }

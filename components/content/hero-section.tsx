@@ -4,18 +4,18 @@ import { TypingAnimation } from "../magicui/typing-animation"
 import { AnimatedSpan, Terminal } from "../magicui/terminal"
 import { formatDate } from "@/lib/utils"
 import { TextAnimate } from "../magicui/text-animate"
-import { SKILLS } from "@/lib/consts"
+import { SKILLS, START_JOB_DATE } from "@/lib/consts"
 import { useTranslations } from "next-intl"
 
 export default function HeroSection() {
   const t = useTranslations('HomePage');
   
   const currentDate = new Date()
-  const startJobDate = new Date("2022-01-01")
+  const startJobDate = new Date(START_JOB_DATE)
   const yearsSinceStartJob = currentDate.getFullYear() - startJobDate.getFullYear()
 
   return (
-    <section className="relative w-full min-h-screen overflow-hidden bg-background flex items-center justify-center">
+    <section className="relative w-full min-h-screen overflow-hidden bg-background flex items-center justify-center px-4">
       {/* Content container */}
       <div className="relative container mx-auto px-4 text-center z-20">
         {/* Animated V */}
@@ -24,14 +24,6 @@ export default function HeroSection() {
             <LineShadowText className="text-[10rem] md:text-[12rem] lg:text-[15rem]">
               V
             </LineShadowText>
-            {/* <TextAnimate animation="slideLeft" by="character" className="absolute uppercase text-4xl bottom-18 -right-12">
-              italy
-            </TextAnimate> */}
-            {/* <TypingAnimation 
-              className="absolute uppercase text-5xl bottom-18 -right-22"
-            >
-              italy
-            </TypingAnimation> */}
           </div>
 
           {/* Digital readout effect */}
@@ -43,17 +35,17 @@ export default function HeroSection() {
         {/* Hero content */}
         <div className="flex items-center justify-center flex-wrap gap-3 text-3xl sm:text-4xl md:text-6xl font-bold text-foreground mb-4 tracking-tight uppercase">
           <GlitchText className="text-violet" classNameGlitch="text-background/50" classNameGlitch2="text-violet">
-            <TextAnimate animation="slideLeft" by="character" as="h1" duration={0.2}>
+            <TextAnimate once animation="slideLeft" by="character" as="h1" duration={0.2}>
               {t("front-end")}
             </TextAnimate>
           </GlitchText>
-          <TextAnimate animation="slideLeft" by="character" as="h1" delay={0.3} duration={0.2}>
+          <TextAnimate once animation="slideLeft" by="character" as="h1" delay={0.3} duration={0.2}>
             {t("development")}
           </TextAnimate>
         </div>
         <div className="text-foreground/70 uppercase max-w-2xl mx-auto mb-8 min-h-7">
           {/* <GlitchText classNameGlitch2="text-background/60"> */}
-            <TextAnimate delay={0.7} animation="fadeIn" by="line" as="p" className="text-base sm:text-lg md:text-xl">
+            <TextAnimate once delay={0.7} animation="fadeIn" by="line" as="p" className="text-base sm:text-lg md:text-xl">
               React, Next.js // TypeScript // Tailwind
             </TextAnimate>
           {/* </GlitchText> */}
@@ -84,11 +76,11 @@ export default function HeroSection() {
           </AnimatedSpan>
 
           <AnimatedSpan delay={2500} className="text-violet z-20">
-            <span>- {t("iam")}</span>
+            <span>- {t("iam.full")}</span>
           </AnimatedSpan>
 
           <AnimatedSpan delay={3000} className="text-violet z-20">
-            <span>- {t("experience", { yearsSinceStartJob })}</span>
+            <span>- {t("experience.full", { yearsSinceStartJob })}</span>
           </AnimatedSpan>
 
           <TypingAnimation duration={20} delay={3500} className="text-sm">
