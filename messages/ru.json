@@ -1,0 +1,16 @@
+{
+  "Dock": {
+    "home": "Главная",
+    "send-email": "Отправить Email",
+    "theme": "Тема",
+    "locale": "Язык"
+  },
+  "HomePage": {
+    "front-end": "Front-End",
+    "development": "Разработка",
+    "welcome": "Добро пожаловать!",
+    "iam": "Привет! Я Пермяков Виталий",
+    "experience": "Front-End Разработчик с {yearsSinceStartJob}-летним опытом.",
+    "user": "ПЕРМЯКОВ ВИТАЛИЙ"
+  }
+}

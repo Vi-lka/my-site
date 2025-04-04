@@ -1,0 +1,16 @@
+{
+  "Dock": {
+    "home": "Home",
+    "send-email": "Send Email",
+    "theme": "Theme",
+    "locale": "Locale"
+  },
+  "HomePage": {
+    "front-end": "Front-End",
+    "development": "Development",
+    "welcome": "Welcome!",
+    "iam": "Hi! I am Vitaly Permyakov",
+    "experience": "Front-End Dev with {yearsSinceStartJob} years of experience.",
+    "user": "PERMYAKOV VITALY"
+  }
+}

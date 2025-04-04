@@ -11,6 +11,8 @@ import { Separator } from '../ui/separator';
 import { ModeToggle } from './mode-toggle';
 import { Portal } from '../ui/portal';
 import { isMobile } from 'react-device-detect';
+import { useLocale, useTranslations } from 'next-intl';
+import LocaleSelect from './locale-select';
 
 export type IconProps = React.HTMLAttributes<SVGElement>;
  
@@ -25,32 +27,36 @@ const Icons = {
     </svg>
   ),
 };
- 
-const DATA = {
-  navbar: [
-    { href: "/", icon: HouseIcon, label: "Home" },
-  ],
-  contact: {
-    social: {
-      GitHub: {
-        name: "GitHub",
-        url: "https://github.com/Vi-lka",
-        icon: Icons.github,
-      },
-      email: {
-        name: "Send Email",
-        url: "mailto:vitalya.permyakov155@gmail.com",
-        icon: Icons.email,
-      },
-    },
-  },
-};
 
 export default function DockProvider({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const t = useTranslations("Dock");
+
+  const locale = useLocale()
+
+  const DATA = {
+    navbar: [
+      { href: "/", icon: HouseIcon, label: t("home") },
+    ],
+    contact: {
+      social: {
+        GitHub: {
+          name: "GitHub",
+          url: "https://github.com/Vi-lka",
+          icon: Icons.github,
+        },
+        email: {
+          name: t("send-email"),
+          url: "mailto:vitalya.permyakov155@gmail.com",
+          icon: Icons.email,
+        },
+      },
+    },
+  };
+
   return (
     <>
       {children}
@@ -87,6 +93,7 @@ export default function DockProvider({
                   </Tooltip>
                 </DockIcon>
               ))}
+              
               <Separator 
                 orientation={isMobile ? "vertical" : "horizontal"} 
                 className={cn(
@@ -117,6 +124,7 @@ export default function DockProvider({
                   </Tooltip>
                 </DockIcon>
               ))}
+
               <Separator 
                 orientation={isMobile ? "vertical" : "horizontal"}  
                 className={cn(
@@ -132,7 +140,19 @@ export default function DockProvider({
                     </div>
                   </TooltipTrigger>
                   <TooltipContent side="right">
-                    <p>Theme</p>
+                    <p>{t("theme")}</p>
+                  </TooltipContent>
+                </Tooltip>
+              </DockIcon>
+              <DockIcon>
+                <Tooltip delayDuration={300}>
+                  <TooltipTrigger asChild>
+                    <div className='flex w-fit'>
+                      <LocaleSelect variant="ghost" className={cn(isMobile ? "size-10" : "size-12", "rounded-full")} />
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent side="right">
+                    <p>{t("locale")}: <span className='uppercase'>{locale}</span></p>
                   </TooltipContent>
                 </Tooltip>
               </DockIcon>

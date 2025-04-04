@@ -9,7 +9,7 @@ export default function BgCanvas({
 }: {
   className?: string
 }) {
-  const { theme } = useTheme()
+  const { resolvedTheme } = useTheme()
 
   const canvasRef = React.useRef<HTMLCanvasElement>(null)
 
@@ -40,19 +40,19 @@ export default function BgCanvas({
 
       // Background gradient
       const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height)
-      gradient.addColorStop(0, theme === "dark" ? "rgba(0, 0, 0, 0.5)" : "rgba(10, 10, 10, 0.2)")
-      gradient.addColorStop(1, theme === "dark" ? "rgba(10, 10, 10, 0.5)" : "rgba(255, 255, 255, 0.5)")
+      gradient.addColorStop(0, resolvedTheme === "dark" ? "rgba(0, 0, 0, 0.5)" : "rgba(10, 10, 10, 0.2)")
+      gradient.addColorStop(1, resolvedTheme === "dark" ? "rgba(10, 10, 10, 0.5)" : "rgba(255, 255, 255, 0.5)")
       ctx.fillStyle = gradient
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
       // Digital scan lines
-      ctx.fillStyle = theme === "dark" ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.15)"
+      ctx.fillStyle = resolvedTheme === "dark" ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.15)"
       for (let y = 0; y < canvas.height; y += 4) {
         ctx.fillRect(0, y, canvas.width, 1)
       }
 
       // Random circuit lines
-      ctx.strokeStyle = theme === "dark" ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.15)"
+      ctx.strokeStyle = resolvedTheme === "dark" ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.15)"
       ctx.lineWidth = 1
 
       const circuitPoints = 5
@@ -90,7 +90,7 @@ export default function BgCanvas({
           const width = Math.random() * 100 + 50
           const height = Math.random() * 20 + 5
 
-          ctx.fillStyle = theme === "dark" ? `rgba(255, 255, 255, ${Math.random() * 0.15})` : `rgba(0, 0, 0, ${Math.random() * 0.15})`
+          ctx.fillStyle = resolvedTheme === "dark" ? `rgba(255, 255, 255, ${Math.random() * 0.15})` : `rgba(0, 0, 0, ${Math.random() * 0.15})`
           ctx.fillRect(x, y, width, height)
         }
       }
@@ -109,7 +109,7 @@ export default function BgCanvas({
       window.removeEventListener("resize", resizeCanvas)
       cancelAnimationFrame(animationFrame)
     }
-  }, [theme])
+  }, [resolvedTheme])
 
   return (
     <canvas ref={canvasRef} className={cn("absolute inset-0 w-full h-full z-10", className)} />

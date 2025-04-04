@@ -1,25 +1,15 @@
-"use client"
-
 import GlitchText from "../special/glitch-text"
 import { LineShadowText } from "../magicui/line-shadow-text"
 import { TypingAnimation } from "../magicui/typing-animation"
 import { AnimatedSpan, Terminal } from "../magicui/terminal"
 import { formatDate } from "@/lib/utils"
 import { TextAnimate } from "../magicui/text-animate"
-
-const SKILLS = [
-  "TypeScript",
-  "React / Next.js",
-  "Drizzle / Prisma",
-  "REST API / GraphQL / tRPC / WebSockets",
-  "CSS / SCSS / Tailwind",
-  "Zustand / Jotai / nuqs / Redux Toolkit",
-  "TanStack ...",
-  "Three.js / Drei / Spring / Motion",
-  "Docker",
-]
+import { SKILLS } from "@/lib/consts"
+import { useTranslations } from "next-intl"
 
 export default function HeroSection() {
+  const t = useTranslations('HomePage');
+  
   const currentDate = new Date()
   const startJobDate = new Date("2022-01-01")
   const yearsSinceStartJob = currentDate.getFullYear() - startJobDate.getFullYear()
@@ -54,11 +44,11 @@ export default function HeroSection() {
         <div className="flex items-center justify-center flex-wrap gap-3 text-3xl sm:text-4xl md:text-6xl font-bold text-foreground mb-4 tracking-tight uppercase">
           <GlitchText className="text-violet" classNameGlitch="text-background/50" classNameGlitch2="text-violet">
             <TextAnimate animation="slideLeft" by="character" as="h1" duration={0.2}>
-              Front-End
+              {t("front-end")}
             </TextAnimate>
           </GlitchText>
           <TextAnimate animation="slideLeft" by="character" as="h1" delay={0.3} duration={0.2}>
-            РАЗРАБОТКА
+            {t("development")}
           </TextAnimate>
         </div>
         <div className="text-foreground/70 uppercase max-w-2xl mx-auto mb-8 min-h-7">
@@ -90,15 +80,15 @@ export default function HeroSection() {
           </TypingAnimation>
 
           <AnimatedSpan delay={2000} className="text-green-500">
-            <span>✔ Добро пожаловать!</span>
+            <span>✔ {t("welcome")}</span>
           </AnimatedSpan>
 
           <AnimatedSpan delay={2500} className="text-violet z-20">
-            <span>- Привет! Я Пермяков Виталий</span>
+            <span>- {t("iam")}</span>
           </AnimatedSpan>
 
           <AnimatedSpan delay={3000} className="text-violet z-20">
-            <span>- Front-End Разработчик с {yearsSinceStartJob}-летним опытом.</span>
+            <span>- {t("experience", { yearsSinceStartJob })}</span>
           </AnimatedSpan>
 
           <TypingAnimation duration={20} delay={3500} className="text-sm">
@@ -125,7 +115,7 @@ export default function HeroSection() {
 
       <div className="absolute bottom-5 right-5 text-violet text-xs text-right md:flex flex-col hidden z-0">
         <GlitchText className="text-violet" classNameGlitch="text-background/60" classNameGlitch2="text-violet">
-          USER: ПЕРМЯКОВ ВИТАЛИЙ
+          USER: {t("user")}
         </GlitchText>
         <GlitchText className="text-violet" classNameGlitch="text-background/60" classNameGlitch2="text-violet">
           STATUS: SEARCH JOB
