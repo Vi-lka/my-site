@@ -17,7 +17,7 @@ export default function IamSection({
   const yearsSinceStartJob = currentDate.getFullYear() - startJobDate.getFullYear()
 
   return (
-    <section className={cn('flex flex-col gap-12 sm:gap-24 px-4', className)}>
+    <section className={cn('flex flex-col gap-12 sm:gap-24 min-h-[70vh] items-center px-4', className)}>
       <div className='flex items-center flex-wrap justify-center text-center gap-x-2'>
         <TypingAnimation startOnView duration={40} className='text-3xl md:text-4xl lg:text-5xl'>
           {t("iam.hi") + " " + t("iam.i")}

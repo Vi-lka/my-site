@@ -1,11 +1,10 @@
 "use client"
 
-import AnimatedCard from '@/components/special/animated-card'
-import { CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import React, { JSX } from 'react'
 import { Icons } from './icons'
-import { TypingAnimation } from '@/components/magicui/typing-animation'
 import { cn } from '@/lib/utils'
+import { motion, Variants } from 'motion/react'
 
 type SkillsItemT = {
   title: string,
@@ -124,30 +123,87 @@ export default function SkillsCards({
   className?: string
 }) {
 
-  const delayAll = delay ? delay : 0
+  const delayAll = delay ? delay/1000 : 0
+
+  const gridVariants: Variants = {
+    show: {
+      transition: { staggerChildren: 0.2, delayChildren: delayAll, },
+    },
+    hidden: {
+      transition: { staggerChildren: 0.2, staggerDirection: -1},
+    },
+  }
+
+  const itemVariants: Variants = {
+    show: {
+      opacity: 1, 
+      width: "auto",
+      transition: {
+        type: "tween",
+        opacity: { duration: 0.1 },
+        staggerChildren: 0.05, 
+      }
+    },
+    hidden: {
+      opacity: 0, 
+      width: 0,
+      transition: { staggerChildren: 0.2, staggerDirection: -1},
+    }
+  }
+
+  const textVariants: Variants = {
+    show: {
+      opacity: 1,
+      transition: { duration: 0.01 },
+    },
+    hidden: { 
+      opacity: 0, 
+      transition: { duration: 0 },
+    },
+  }
 
   return (
-    <div className={cn("grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4", className)}>
+    <motion.div
+      variants={gridVariants}
+      initial={"hidden"}
+      whileInView={"show"}
+      viewport={{ once: true }}
+      className={cn("grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4", className)}
+    >
       {SKILLS_ITEMS.map((item, key) => {
-        const delayItem = delayAll + key*200
+        // const delayItem = delayAll + key*200
+        const characters = item.title.split("");
         return (
-          <AnimatedCard key={key} startOnView delay={delayItem} duration={20} className='flex-row min-h-32 h-full'>
+          <motion.div
+            key={key}
+            variants={itemVariants}
+          >
+          <Card className="flex-row min-h-32">
             <CardHeader className='flex-1 pr-0 z-20'>
               <CardTitle>
                 <item.icon className='md:size-8 size-6' />
               </CardTitle>
-              <CardDescription className='text-foreground'>
-                <TypingAnimation startOnView delay={100 + delayItem} duration={20} className="text-base sm:text-lg lg:text-xl">
-                  {item.title}
-                </TypingAnimation>
+              <CardDescription className='text-foreground inline-block leading-[5rem] tracking-[-0.02em] whitespace-nowrap'>
+                {characters.map((char, charKey) => (
+                  <motion.span
+                    key={`${key}-${charKey}`}
+                    variants={textVariants}
+                    className='font-bold text-base sm:text-lg lg:text-xl'
+                  >
+                    {char}
+                  </motion.span>
+                ))} 
               </CardDescription>
             </CardHeader>
             <CardContent className='pl-0 z-20'>
               {item.content}
             </CardContent>
-          </AnimatedCard>
+          </Card>
+          </motion.div>
+          // <AnimatedCard key={key} startOnView duration={20} className='flex-row min-h-32 h-full'>
+          // </AnimatedCard>
         )
       })}
-    </div>
+    </motion.div>
   )
 }

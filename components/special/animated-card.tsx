@@ -36,8 +36,8 @@ export default function AnimatedCard({
   children,
   className,
   classNameContainer,
-  startOnView = true,
-  once = true,
+  startOnView = false,
+  once = false,
   duration = 40,
   delay,
   ...props
