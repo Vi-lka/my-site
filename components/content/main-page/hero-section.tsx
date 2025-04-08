@@ -1,9 +1,9 @@
-import GlitchText from "../special/glitch-text"
-import { LineShadowText } from "../magicui/line-shadow-text"
-import { TypingAnimation } from "../magicui/typing-animation"
-import { AnimatedSpan, Terminal } from "../magicui/terminal"
+import GlitchText from "../../special/glitch-text"
+import { LineShadowText } from "../../magicui/line-shadow-text"
+import { TypingAnimation } from "../../magicui/typing-animation"
+import { AnimatedSpan, Terminal } from "../../magicui/terminal"
 import { formatDate } from "@/lib/utils"
-import { TextAnimate } from "../magicui/text-animate"
+import { TextAnimate } from "../../magicui/text-animate"
 import { SKILLS, START_JOB_DATE } from "@/lib/consts"
 import { useTranslations } from "next-intl"
 
@@ -15,7 +15,7 @@ export default function HeroSection() {
   const yearsSinceStartJob = currentDate.getFullYear() - startJobDate.getFullYear()
 
   return (
-    <section className="relative w-full min-h-screen overflow-hidden bg-background flex items-center justify-center px-4">
+    <section id="home" className="relative w-full min-h-screen overflow-hidden bg-transparent flex items-center justify-center px-4">
       {/* Content container */}
       <div className="relative container mx-auto px-4 text-center z-20">
         {/* Animated V */}
@@ -93,25 +93,6 @@ export default function HeroSection() {
             </AnimatedSpan>
           ))}
         </Terminal>
-      </div>
-
-      {/* HUD-like elements */}
-      <div className="absolute top-5 left-5 text-violet text-xs md:flex flex-col hidden z-0">
-        <GlitchText className="text-violet" classNameGlitch="text-background/60" classNameGlitch2="text-violet">
-          SYS.STATUS: ONLINE
-        </GlitchText>
-        <GlitchText className="text-violet" classNameGlitch="text-background/60" classNameGlitch2="text-violet">
-          SECURITY: ACTIVE
-        </GlitchText>
-      </div>
-
-      <div className="absolute bottom-5 right-5 text-violet text-xs text-right md:flex flex-col hidden z-0">
-        <GlitchText className="text-violet" classNameGlitch="text-background/60" classNameGlitch2="text-violet">
-          USER: {t("user")}
-        </GlitchText>
-        <GlitchText className="text-violet" classNameGlitch="text-background/60" classNameGlitch2="text-violet">
-          STATUS: SEARCH JOB
-        </GlitchText>
       </div>
     </section>
   )

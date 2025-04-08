@@ -1,28 +1,35 @@
 {
+  "Metadata": {
+    "title": "V - React Разработчик",
+    "description": "Виталий Пермяков - React Разработчик"
+  },
   "Dock": {
     "home": "Главная",
-    "stack": "Стек",
+    "skills": "Навыки",
     "send-email": "Отправить Email",
     "theme": "Тема",
     "locale": "Язык"
   },
   "HomePage": {
-    "front-end": "Front-End",
+    "front-end": "React",
     "development": "Разработка",
     "welcome": "Добро пожаловать!",
     "iam": {
-      "full": "Привет! Я Пермяков Виталий",
+      "full": "Привет! Я Виталий Пермяков",
       "hi": "Привет!",
       "i": "Я",
-      "am": "Пермяков Виталий"
+      "am": "Виталий Пермяков"
     },
     "experience": {
-      "full": "Front-End Разработчик с {yearsSinceStartJob}-летним опытом.",
-      "front-end": "Front-End",
+      "full": "React Разработчик с {yearsSinceStartJob}-летним опытом.",
+      "front-end": "React",
       "developer": "Разработчик c",
       "yearsCount": "{yearsSinceStartJob}",
       "years": "летним опытом."
     },
-    "user": "ПЕРМЯКОВ ВИТАЛИЙ"
+    "skills": {
+      "title": "Навыки",
+      "terminal": "Атом навыков инициализирован"
+    }
   }
 }

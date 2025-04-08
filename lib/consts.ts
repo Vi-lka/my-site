@@ -3,11 +3,11 @@ export const SKILLS = [
   "React / Next.js",
   "Drizzle / Prisma",
   "REST API / GraphQL / tRPC / WebSockets",
-  "CSS / SCSS / Tailwind",
+  "CSS / Tailwind",
   "Zustand / Jotai / nuqs / Redux Toolkit",
-  "TanStack ...",
+  "React Router / TanStack ...",
   "Three.js / Drei / Spring / Motion",
   "Docker",
 ]
 
-export const START_JOB_DATE = "2022-01-01"
+export const START_JOB_DATE = "2021-03-01"

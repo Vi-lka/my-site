@@ -1,6 +1,6 @@
 "use client"
 
-import { BlocksIcon, HouseIcon, MailIcon } from 'lucide-react';
+import { BoxesIcon, HouseIcon, MailIcon } from 'lucide-react';
 import React from 'react'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip';
 import { Dock, DockIcon } from '../magicui/dock';
@@ -39,8 +39,8 @@ export default function DockProvider({
 
   const DATA = {
     navbar: [
-      { href: "/", icon: HouseIcon, label: t("home") },
-      { href: "/#stack", icon: BlocksIcon, label: t("stack") },
+      { href: "/#home", icon: HouseIcon, label: t("home") },
+      { href: "/#skills", icon: BoxesIcon, label: t("skills") },
     ],
     contact: {
       social: {
@@ -88,7 +88,7 @@ export default function DockProvider({
                         <item.icon className="size-4" />
                       </Link>
                     </TooltipTrigger>
-                    <TooltipContent side="right">
+                    <TooltipContent side={isMobile ? "top" : "right"}>
                       <p>{item.label}</p>
                     </TooltipContent>
                   </Tooltip>
@@ -119,7 +119,7 @@ export default function DockProvider({
                         <social.icon className="size-4" />
                       </Link>
                     </TooltipTrigger>
-                    <TooltipContent side="right">
+                    <TooltipContent side={isMobile ? "top" : "right"}>
                       <p>{social.name}</p>
                     </TooltipContent>
                   </Tooltip>
@@ -140,7 +140,7 @@ export default function DockProvider({
                       <ModeToggle variant="ghost" className={cn(isMobile ? "size-10" : "size-12", "rounded-full")} />
                     </div>
                   </TooltipTrigger>
-                  <TooltipContent side="right">
+                  <TooltipContent side={isMobile ? "top" : "right"}>
                     <p>{t("theme")}</p>
                   </TooltipContent>
                 </Tooltip>
@@ -152,7 +152,7 @@ export default function DockProvider({
                       <LocaleSelect variant="ghost" className={cn(isMobile ? "size-10" : "size-12", "rounded-full")} />
                     </div>
                   </TooltipTrigger>
-                  <TooltipContent side="right">
+                  <TooltipContent side={isMobile ? "top" : "right"}>
                     <p>{t("locale")}: <span className='uppercase'>{locale}</span></p>
                   </TooltipContent>
                 </Tooltip>

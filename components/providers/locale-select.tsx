@@ -9,7 +9,8 @@ import { SelectTrigger } from '@radix-ui/react-select'
 import { Languages } from 'lucide-react'
 import { useLocale } from 'next-intl'
 import { Locale, locales } from '@/i18n/config'
-import { setUserLocale } from '@/lib/locale'
+import {usePathname, useRouter} from '@/i18n/navigation';
+import { useParams } from 'next/navigation'
 
 export default function LocaleSelect({
   variant = "outline",
@@ -18,14 +19,24 @@ export default function LocaleSelect({
   variant?: VariantProps<typeof buttonVariants>["variant"]
   className?: string
 }) {
-  const locale = useLocale()
+  const locale = useLocale();
 
   const [isPending, startTransition] = useTransition();
+  
+  const router = useRouter();
+  const pathname = usePathname();
+  const params = useParams();
 
   function onChange(value: string) {
-    const locale = value as Locale;
+    const nextLocale = value as Locale;
     startTransition(() => {
-      setUserLocale(locale);
+      router.replace(
+        // @ts-expect-error -- TypeScript will validate that only known `params`
+        // are used in combination with a given `pathname`. Since the two will
+        // always match for the current route, we can skip runtime checks.
+        { pathname, params },
+        { scroll: false, locale: nextLocale }
+      );
     });
   }
 
@@ -47,7 +58,7 @@ export default function LocaleSelect({
           <Languages />
         </Button>
       </SelectTrigger>
-      <SelectContent className='uppercase w-fit min-w-0'>
+      <SelectContent className='uppercase w-fit min-w-0 bg-transparent shadow-none'>
         {locales.map(lang => (
           <SelectItem key={lang} value={lang}>{lang}</SelectItem>
         ))}

@@ -1,13 +1,17 @@
 {
+  "Metadata": {
+    "title": "V - React Developer",
+    "description": "Vitaly Permyakov - React Developer"
+  },
   "Dock": {
     "home": "Home",
-    "stack": "Стэк",
+    "skills": "Skills",
     "send-email": "Send Email",
     "theme": "Theme",
     "locale": "Locale"
   },
   "HomePage": {
-    "front-end": "Front-End",
+    "front-end": "React",
     "development": "Development",
     "welcome": "Welcome!",
     "iam": {
@@ -17,12 +21,15 @@
       "am": "Vitaly Permyakov"
     },
     "experience": {
-      "full": "Front-End Dev with {yearsSinceStartJob} years of experience.",
-      "front-end": "Front-End",
+      "full": "React Dev with {yearsSinceStartJob} years of experience.",
+      "front-end": "React",
       "developer": "Dev with",
       "yearsCount": "{yearsSinceStartJob}",
       "years": "years of experience."
     },
-    "user": "PERMYAKOV VITALY"
+    "skills": {
+      "title": "Skills",
+      "terminal": "Skills atom initialized"
+    }
   }
 }
