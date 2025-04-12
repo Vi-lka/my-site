@@ -5,6 +5,8 @@ import React, { JSX } from 'react'
 import { Icons } from './icons'
 import { cn } from '@/lib/utils'
 import { motion, Variants } from 'motion/react'
+import { TooltipProvider } from '@/components/ui/tooltip'
+import TooltipClick from '@/components/special/tooltip-click'
 
 type SkillsItemT = {
   title: string,
@@ -163,47 +165,53 @@ export default function SkillsCards({
   }
 
   return (
-    <motion.div
-      variants={gridVariants}
-      initial={"hidden"}
-      whileInView={"show"}
-      viewport={{ once: true }}
-      className={cn("grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4", className)}
-    >
-      {SKILLS_ITEMS.map((item, key) => {
-        // const delayItem = delayAll + key*200
-        const characters = item.title.split("");
-        return (
-          <motion.div
-            key={key}
-            variants={itemVariants}
-          >
-          <Card className="flex-row min-h-32">
-            <CardHeader className='flex-1 pr-0 z-20'>
-              <CardTitle>
-                <item.icon className='md:size-8 size-6' />
-              </CardTitle>
-              <CardDescription className='text-foreground inline-block leading-[5rem] tracking-[-0.02em] whitespace-nowrap'>
-                {characters.map((char, charKey) => (
-                  <motion.span
-                    key={`${key}-${charKey}`}
-                    variants={textVariants}
-                    className='font-bold text-base sm:text-lg lg:text-xl'
-                  >
-                    {char}
-                  </motion.span>
-                ))} 
-              </CardDescription>
-            </CardHeader>
-            <CardContent className='pl-0 z-20'>
-              {item.content}
-            </CardContent>
-          </Card>
-          </motion.div>
-          // <AnimatedCard key={key} startOnView duration={20} className='flex-row min-h-32 h-full'>
-          // </AnimatedCard>
-        )
-      })}
-    </motion.div>
+    <TooltipProvider>
+      <motion.div
+        variants={gridVariants}
+        initial={"hidden"}
+        whileInView={"show"}
+        viewport={{ once: true }}
+        className={cn("grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4", className)}
+      >
+        {SKILLS_ITEMS.map((item, key) => {
+          const characters = item.title.split("");
+          return (
+            <motion.div
+              key={key}
+              variants={itemVariants}
+            >
+              <Card className="flex-row min-h-32 p-0 border-none">
+                <TooltipClick 
+                  trigger={
+                    <CardHeader className='flex-1 pr-0 py-6 w-full rounded-md border dark:hover:bg-background/70 hover:bg-foreground/5 dark:border-border border-border/30 dark:hover:border-foreground/30 hover:border-border/70 transition-all z-20'>
+                      <CardTitle>
+                        <item.icon className='md:size-8 size-6' />
+                      </CardTitle>
+                      <CardDescription className='text-foreground inline-block leading-[5rem] tracking-[-0.02em] whitespace-nowrap'>
+                        {characters.map((char, charKey) => (
+                          <motion.span
+                            key={`${key}-${charKey}`}
+                            variants={textVariants}
+                            className='font-bold text-base sm:text-lg lg:text-xl'
+                          >
+                            {char}
+                          </motion.span>
+                        ))} 
+                      </CardDescription>
+                    </CardHeader>
+                  }
+                  triggerAsChild
+                  classNameContent=''
+                >
+                  <CardContent>
+                    {item.content}
+                  </CardContent>
+                </TooltipClick>
+              </Card>
+            </motion.div>
+          )
+        })}
+      </motion.div>
+    </TooltipProvider>
   )
 }
