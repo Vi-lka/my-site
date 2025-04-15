@@ -39,8 +39,8 @@ export default function DockProvider({
 
   const DATA = {
     navbar: [
-      { href: "/#home", icon: HouseIcon, label: t("home") },
-      { href: "/#skills", icon: BoxesIcon, label: t("skills") },
+      { href: `/${locale}/#home`, icon: HouseIcon, label: t("home") },
+      { href: `/${locale}/#skills`, icon: BoxesIcon, label: t("skills") },
     ],
     contact: {
       social: {
@@ -70,7 +70,8 @@ export default function DockProvider({
             <Dock 
               orientation={isMobile ? 'horizontal' : 'vertical'} 
               direction="middle" 
-              className={cn('rounded-lg border-none bg-transparent', !isMobile && "backdrop-blur-none")}
+              className={cn('rounded-lg border-none bg-transparent z-50', !isMobile && "backdrop-blur-none")}
+              style={{ viewTransitionName: "no-transition-dock" }}
             >
               {DATA.navbar.map((item) => (
                 <DockIcon key={item.label}>

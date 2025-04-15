@@ -1,18 +1,39 @@
+"use client"
+
 import GlitchText from "../../special/glitch-text"
 import { LineShadowText } from "../../magicui/line-shadow-text"
 import { TypingAnimation } from "../../magicui/typing-animation"
 import { AnimatedSpan, Terminal } from "../../magicui/terminal"
 import { formatDate } from "@/lib/utils"
 import { TextAnimate } from "../../magicui/text-animate"
-import { SKILLS, START_JOB_DATE } from "@/lib/consts"
+import { SKILLS_TERMINAL, START_JOB_DATE } from "@/lib/consts"
 import { useTranslations } from "next-intl"
+import React from "react"
 
 export default function HeroSection() {
   const t = useTranslations('HomePage');
+
+  const [hasAnimatedHero, setHasAnimatedHero] = React.useState(false);
+  const [hasAnimatedTerminal, setHasAnimatedTerminal] = React.useState(false);
   
   const currentDate = new Date()
   const startJobDate = new Date(START_JOB_DATE)
   const yearsSinceStartJob = currentDate.getFullYear() - startJobDate.getFullYear()
+
+  React.useEffect(() => {
+    const animatedHero = sessionStorage.getItem('hasSeenHeroAnimation');
+    const animatedTerminal = sessionStorage.getItem('hasSeenTerminalAnimation');
+    if (animatedHero) {
+      setHasAnimatedHero(true);
+    } else {
+      setHasAnimatedHero(false);
+    }
+    if (animatedTerminal) {
+      setHasAnimatedTerminal(true);
+    } else {
+      setHasAnimatedTerminal(false);
+    }
+  }, []);
 
   return (
     <section id="home" className="relative w-full min-h-screen overflow-hidden bg-transparent flex items-center justify-center px-4">
@@ -35,17 +56,46 @@ export default function HeroSection() {
         {/* Hero content */}
         <div className="flex items-center justify-center flex-wrap gap-3 text-3xl sm:text-4xl md:text-6xl font-bold text-foreground mb-4 tracking-tight uppercase">
           <GlitchText className="text-violet" classNameGlitch="text-background/50" classNameGlitch2="text-violet">
-            <TextAnimate once animation="slideLeft" by="character" as="h1" duration={0.2}>
+            <TextAnimate 
+              once 
+              animation="slideLeft" 
+              by="character" 
+              as="h1" 
+              duration={0.1}
+              initial={hasAnimatedHero ? 'show' : 'hidden'}
+            >
               {t("front-end")}
             </TextAnimate>
           </GlitchText>
-          <TextAnimate once animation="slideLeft" by="character" as="h1" delay={0.3} duration={0.2}>
+          <TextAnimate 
+            once 
+            animation="slideLeft" 
+            by="character" 
+            as="h1" 
+            delay={0.2} 
+            duration={0.1}
+            initial={hasAnimatedHero ? 'show' : 'hidden'}
+          >
             {t("development")}
           </TextAnimate>
         </div>
         <div className="text-foreground/70 uppercase max-w-2xl mx-auto mb-8 min-h-7">
           {/* <GlitchText classNameGlitch2="text-background/60"> */}
-            <TextAnimate once delay={0.7} animation="fadeIn" by="line" as="p" className="text-base sm:text-lg md:text-xl">
+            <TextAnimate 
+              once 
+              delay={0.4} 
+              animation="fadeIn" 
+              by="line" 
+              as="p" 
+              className="text-base sm:text-lg md:text-xl"
+              initial={hasAnimatedHero ? 'show' : 'hidden'}
+              onAnimationComplete={() => {
+                if (!hasAnimatedHero) {
+                  sessionStorage.setItem('hasSeenHeroAnimation', 'true');
+                  setHasAnimatedHero(true);
+                }
+              }}
+            >
               React, Next.js // TypeScript // Tailwind
             </TextAnimate>
           {/* </GlitchText> */}
@@ -67,28 +117,39 @@ export default function HeroSection() {
 
       <div className="absolute md:top-0 md:right-5 md:left-auto -top-8 left-2 dark:opacity-100 opacity-70 z-0">
         <Terminal className="text-sm w-96 bg-transparent border-none" classNameBar="opacity-0">
-          <TypingAnimation delay={1000} duration={20} className="text-sm">
+          <TypingAnimation delay={700} duration={10} className="text-sm" disabled={hasAnimatedTerminal}>
             &gt; pnpm dlx portfolio@latest init
           </TypingAnimation>
 
-          <AnimatedSpan delay={2000} className="text-green-500">
+          <AnimatedSpan delay={1000} className="text-green-500" disabled={hasAnimatedTerminal}>
             <span>✔ {t("welcome")}</span>
           </AnimatedSpan>
 
-          <AnimatedSpan delay={2500} className="text-violet z-20">
+          <AnimatedSpan delay={1300} className="text-violet z-20" disabled={hasAnimatedTerminal}>
             <span>- {t("iam.full")}</span>
           </AnimatedSpan>
 
-          <AnimatedSpan delay={3000} className="text-violet z-20">
+          <AnimatedSpan delay={1800} className="text-violet z-20" disabled={hasAnimatedTerminal}>
             <span>- {t("experience.full", { yearsSinceStartJob })}</span>
           </AnimatedSpan>
 
-          <TypingAnimation duration={20} delay={3500} className="text-sm">
+          <TypingAnimation duration={10} delay={2400} className="text-sm" disabled={hasAnimatedTerminal}>
             &gt; pnpm add skills
           </TypingAnimation>
 
-          {SKILLS.map((skill, index) => (
-            <AnimatedSpan key={index} delay={4000 + index * 500} className="text-green-500">
+          {SKILLS_TERMINAL.map((skill, index) => (
+            <AnimatedSpan 
+              key={index} 
+              delay={2600 + index * 350} 
+              className="text-green-500"
+              disabled={hasAnimatedTerminal}
+              onAnimationComplete={() => {
+                if (!hasAnimatedTerminal) {
+                  sessionStorage.setItem('hasSeenTerminalAnimation', 'true');
+                  setHasAnimatedTerminal(true);
+                }
+              }}
+            >
               <span>✔ {skill}</span>
             </AnimatedSpan>
           ))}

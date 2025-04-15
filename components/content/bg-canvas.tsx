@@ -5,9 +5,11 @@ import { useTheme } from 'next-themes'
 import React from 'react'
 
 export default function BgCanvas({
-  className
+  className,
+  style
 }: {
-  className?: string
+  className?: string;
+  style?: React.CSSProperties
 }) {
   const { resolvedTheme } = useTheme()
 
@@ -41,7 +43,7 @@ export default function BgCanvas({
       // Background gradient
       const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height)
       gradient.addColorStop(0, resolvedTheme === "dark" ? "rgba(0, 0, 0, 0.5)" : "rgba(10, 10, 10, 0.2)")
-      gradient.addColorStop(1, resolvedTheme === "dark" ? "rgba(10, 10, 10, 0.5)" : "rgba(255, 255, 255, 0.5)")
+      gradient.addColorStop(1, resolvedTheme === "dark" ? "rgba(10, 10, 10, 0.2)" : "rgba(255, 255, 255, 0.5)")
       ctx.fillStyle = gradient
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
@@ -112,6 +114,6 @@ export default function BgCanvas({
   }, [resolvedTheme])
 
   return (
-    <canvas ref={canvasRef} className={cn("absolute inset-0 w-full h-full z-10", className)} />
+    <canvas ref={canvasRef} className={cn("absolute inset-0 w-full h-screen z-10", className)} style={style} />
   )
 }

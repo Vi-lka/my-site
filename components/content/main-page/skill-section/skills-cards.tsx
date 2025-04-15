@@ -1,121 +1,26 @@
 "use client"
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import React, { JSX } from 'react'
 import { Icons } from './icons'
 import { cn } from '@/lib/utils'
 import { motion, Variants } from 'motion/react'
-import { TooltipProvider } from '@/components/ui/tooltip'
-import TooltipClick from '@/components/special/tooltip-click'
+import { SKILLS } from '@/lib/consts'
+import { Link } from 'next-view-transitions'
+import ViewTransition from "@/components/ViewTransition"
+import { useLocale } from 'next-intl'
 
 type SkillsItemT = {
+  id: string,
   title: string,
   icon: ({ className }: { className?: string; }) => JSX.Element,
-  content: React.ReactNode
 }
 
-const SKILLS_ITEMS: SkillsItemT[] = [
-  {
-    title: "TypeScript",
-    icon: Icons.typescript,
-    content: <></>
-  },
-  {
-    title: "React",
-    icon: Icons.react,
-    content: <></>
-  },
-  {
-    title: "Next.js",
-    icon: Icons.next,
-    content: <></>
-  },
-  {
-    title: "Tailwind CSS",
-    icon: Icons.tailwind,
-    content: <></>
-  },
-  {
-    title: "Drizzle ORM",
-    icon: Icons.drizzle,
-    content: <></>
-  },
-  {
-    title: "Prisma",
-    icon: Icons.prisma,
-    content: <></>
-  },
-  {
-    title: "REST API",
-    icon: Icons.restApi,
-    content: <></>
-  },
-  {
-    title: "GraphQL",
-    icon: Icons.graphQL,
-    content: <></>
-  },
-  {
-    title: "tRPC",
-    icon: Icons.trpc,
-    content: <></>
-  },
-  {
-    title: "WebSockets",
-    icon: Icons.webSocket,
-    content: <></>
-  },
-  {
-    title: "Tanstack",
-    icon: Icons.tanstack,
-    content: <></>
-  },
-  {
-    title: "React Router",
-    icon: Icons.reactRouter,
-    content: <></>
-  },
-  {
-    title: "Zustand",
-    icon: Icons.zustand,
-    content: <></>
-  },
-  {
-    title: "Redux Toolkit",
-    icon: Icons.redux,
-    content: <></>
-  },
-  {
-    title: "Jotai",
-    icon: Icons.jotai,
-    content: <></>
-  },
-  {
-    title: "nuqs",
-    icon: Icons.nuqs,
-    content: <></>
-  },
-  {
-    title: "Three.js",
-    icon: Icons.threeJs,
-    content: <></>
-  },
-  {
-    title: "Spring",
-    icon: Icons.spring,
-    content: <></>
-  },
-  {
-    title: "Motion",
-    icon: Icons.motion,
-    content: <></>
-  },
-  {
-    title: "Docker",
-    icon: Icons.docker,
-    content: <></>
-  }
-]
+const SKILLS_ITEMS: SkillsItemT[] = Object.values(SKILLS).map((skill) => ({
+  id: skill.id,
+  title: skill.title,
+  icon: Icons[skill.id]
+}))
 
 export default function SkillsCards({
   delay,
@@ -124,15 +29,20 @@ export default function SkillsCards({
   delay?: number
   className?: string
 }) {
+  const locale = useLocale()
+  const [hasAnimated, setHasAnimated] = React.useState(false);
 
   const delayAll = delay ? delay/1000 : 0
 
   const gridVariants: Variants = {
     show: {
-      transition: { staggerChildren: 0.2, delayChildren: delayAll, },
+      transition: { 
+        staggerChildren: hasAnimated ? 0 : 0.1, 
+        delayChildren: hasAnimated ? 0.4 : delayAll, 
+      },
     },
     hidden: {
-      transition: { staggerChildren: 0.2, staggerDirection: -1},
+      transition: { staggerChildren: 0.1, staggerDirection: -1},
     },
   }
 
@@ -141,15 +51,15 @@ export default function SkillsCards({
       opacity: 1, 
       width: "auto",
       transition: {
-        type: "tween",
+        type: 'tween',
         opacity: { duration: 0.1 },
-        staggerChildren: 0.05, 
-      }
+        staggerChildren: 0.05,
+      },
     },
     hidden: {
       opacity: 0, 
       width: 0,
-      transition: { staggerChildren: 0.2, staggerDirection: -1},
+      transition: { staggerChildren: 0.05, staggerDirection: -1},
     }
   }
 
@@ -160,58 +70,68 @@ export default function SkillsCards({
     },
     hidden: { 
       opacity: 0, 
-      transition: { duration: 0 },
+      transition: { duration: 0.01 },
     },
   }
 
+  React.useEffect(() => {
+    const animated = sessionStorage.getItem('hasSeenSkillsAnimation');
+    if (animated) {
+      setHasAnimated(true);
+    } else {
+      setHasAnimated(false);
+    }
+  }, []);
+
   return (
-    <TooltipProvider>
-      <motion.div
-        variants={gridVariants}
-        initial={"hidden"}
-        whileInView={"show"}
-        viewport={{ once: true }}
-        className={cn("grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4", className)}
-      >
-        {SKILLS_ITEMS.map((item, key) => {
-          const characters = item.title.split("");
-          return (
-            <motion.div
-              key={key}
-              variants={itemVariants}
-            >
+    <motion.div
+      variants={gridVariants}
+      initial={hasAnimated ? 'show' : 'hidden'}
+      whileInView={'show'}
+      viewport={{ once: true }}
+      onAnimationComplete={() => {
+        if (!hasAnimated) {
+          sessionStorage.setItem('hasSeenSkillsAnimation', 'true');
+          setHasAnimated(true);
+        }
+      }}
+      className={cn("grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4", className)}
+    >
+      {SKILLS_ITEMS.map((item, key) => {
+        const characters = item.title.split("");
+        return (
+          <motion.div
+            key={key}
+            variants={itemVariants}
+          >
+            <Link href={`/${locale}/${item.id}`} passHref>
               <Card className="flex-row min-h-32 p-0 border-none">
-                <TooltipClick 
-                  trigger={
-                    <CardHeader className='flex-1 pr-0 py-6 w-full rounded-md border dark:hover:bg-background/70 hover:bg-foreground/5 dark:border-border border-border/30 dark:hover:border-foreground/30 hover:border-border/70 transition-all z-20'>
-                      <CardTitle>
-                        <item.icon className='md:size-8 size-6' />
-                      </CardTitle>
-                      <CardDescription className='text-foreground inline-block leading-[5rem] tracking-[-0.02em] whitespace-nowrap'>
-                        {characters.map((char, charKey) => (
-                          <motion.span
-                            key={`${key}-${charKey}`}
-                            variants={textVariants}
-                            className='font-bold text-base sm:text-lg lg:text-xl'
-                          >
-                            {char}
-                          </motion.span>
-                        ))} 
-                      </CardDescription>
-                    </CardHeader>
-                  }
-                  triggerAsChild
-                  classNameContent=''
-                >
-                  <CardContent>
-                    {item.content}
-                  </CardContent>
-                </TooltipClick>
+                <CardHeader className={cn(
+                  'group flex-1 pr-0 py-6 w-full rounded-md border transition-all z-20',
+                  'dark:hover:bg-background/70 hover:bg-foreground/5 dark:border-border border-border/30 dark:hover:border-foreground/30 hover:border-border/70'
+                )}>
+                  <CardTitle>
+                    <item.icon className='md:size-8 size-6' />
+                  </CardTitle>
+                  <ViewTransition name={`skill-${item.id}`}>
+                    <CardDescription className={cn(`skill-${item.id}`, 'text-foreground inline-block leading-[5rem] tracking-[-0.02em] whitespace-nowrap')}>
+                      {characters.map((char, charKey) => (
+                        <motion.span
+                          key={`${key}-${charKey}`}
+                          variants={textVariants}
+                          className='font-bold text-base sm:text-lg lg:text-xl'
+                        >
+                          {char}
+                        </motion.span>
+                      ))} 
+                    </CardDescription>
+                  </ViewTransition>
+                </CardHeader>
               </Card>
-            </motion.div>
-          )
-        })}
-      </motion.div>
-    </TooltipProvider>
+            </Link>
+          </motion.div>
+        )
+      })}
+    </motion.div>
   )
 }

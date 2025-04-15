@@ -8,18 +8,20 @@ interface AnimatedSpanProps extends MotionProps {
   children: React.ReactNode;
   delay?: number;
   className?: string;
+  disabled?: boolean;
 }
 
 export const AnimatedSpan = ({
   children,
   delay = 0,
   className,
+  disabled,
   ...props
 }: AnimatedSpanProps) => (
   <motion.div
-    initial={{ opacity: 0, y: -5 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.3, delay: delay / 1000 }}
+    initial={disabled ? { opacity: 1, y: 0 } : { opacity: 0, y: -5 }}
+    animate={disabled ? undefined : { opacity: 1, y: 0 }}
+    transition={disabled ? {duration: 0} : { duration: 0.3, delay: delay / 1000 }}
     className={cn("grid text-sm font-normal tracking-tight", className)}
     {...props}
   >

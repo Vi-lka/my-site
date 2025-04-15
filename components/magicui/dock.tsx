@@ -4,6 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import {
   motion,
   MotionProps,
+  MotionStyle,
   MotionValue,
   useMotionValue,
   useSpring,
@@ -15,6 +16,7 @@ import { cn } from "@/lib/utils";
 
 export interface DockProps extends VariantProps<typeof dockVariants> {
   className?: string;
+  style?: MotionStyle;
   iconSize?: number;
   iconMagnification?: number;
   iconDistance?: number;
@@ -35,6 +37,7 @@ const Dock = React.forwardRef<HTMLDivElement, DockProps>(
   (
     {
       className,
+      style,
       children,
       iconSize = DEFAULT_SIZE,
       iconMagnification = DEFAULT_MAGNIFICATION,
@@ -79,6 +82,7 @@ const Dock = React.forwardRef<HTMLDivElement, DockProps>(
           mouseY.set(Infinity)
         }}
         {...props}
+        style={style}
         className={cn(
           dockVariants({ className }), {
             "items-start": direction === "top",

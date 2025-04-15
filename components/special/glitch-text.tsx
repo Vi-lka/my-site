@@ -3,18 +3,20 @@ import React from 'react'
 
 export default function GlitchText({
   children,
+  childrenReplace,
   className,
   classNameGlitch,
   classNameGlitch2
 }: {
-  children: React.ReactNode
+  children: React.ReactNode,
+  childrenReplace?: React.ReactNode
   className?: string
   classNameGlitch?: string
   classNameGlitch2?: string
 }) {
   return (
     <span className={cn("relative inline-block", className)}>
-      {children}
+      {childrenReplace ?? children}
       <span
         className={cn("absolute top-0 left-0 w-full h-full overflow-hidden animate-glitch", classNameGlitch)}
         style={{ clipPath: "inset(50% 0 50% 0)" }}

@@ -1,3 +1,5 @@
+"use client"
+
 import { cn } from '@/lib/utils'
 import React from 'react'
 import { OrbitingIcons } from './orbiting-icons'
@@ -14,9 +16,20 @@ export default function SkillsSection({
 }) {
   const t = useTranslations('HomePage.skills');
 
+  const [hasAnimated, setHasAnimated] = React.useState(false);
+
+  React.useEffect(() => {
+    const animated = sessionStorage.getItem('hasSeenSkillsTitleAnimation');
+    if (animated) {
+      setHasAnimated(true);
+    } else {
+      setHasAnimated(false);
+    }
+  }, []);
+
   return (
     <section id="skills" className={cn(
-      'relative w-full min-h-screen flex flex-col gap-6 items-center justify-center px-4 overflow-hidden', 
+      'relative w-full min-h-screen flex flex-col gap-6 items-center justify-center px-4 py-12 overflow-hidden', 
       isMobile ? "px-4" : "md:px-28",
       className
     )}>
@@ -24,16 +37,33 @@ export default function SkillsSection({
         <OrbitingIcons />
       </div>
       <GlitchText className="text-violet w-full z-20" classNameGlitch="text-background/50" classNameGlitch2="text-violet">
-        <TypingAnimation startOnView duration={60} className='text-4xl md:text-5xl lg:text-6xl'>
+        <TypingAnimation 
+          startOnView 
+          duration={40} 
+          className='text-4xl md:text-5xl lg:text-6xl'
+          disabled={hasAnimated}
+        >
           {t("title")}
         </TypingAnimation>
       </GlitchText>
       <div className='w-full'>
-        <TypingAnimation startOnView delay={500} duration={40} className="text-xl md:text-2xl">
+        <TypingAnimation 
+          startOnView 
+          delay={300} 
+          duration={20} 
+          className="text-xl md:text-2xl"
+          disabled={hasAnimated}
+          onComplete={() => {
+            if (!hasAnimated) {
+              sessionStorage.setItem('hasSeenSkillsTitleAnimation', 'true');
+              setHasAnimated(true);
+            }
+          }}
+        >
           &gt; pnpm add skills
         </TypingAnimation>
       </div>
-      <SkillsCards delay={1400} className='w-full' />
+      <SkillsCards delay={700} className='w-full' />
     </section>
   )
 }

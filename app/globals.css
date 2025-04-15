@@ -221,5 +221,66 @@
     /* Thumb color: #718096 */
     /* Track color: #edf2f7 */
     scrollbar-color: var(--muted) var(--background);
+  }
+
+  pre {
+    @apply overflow-x-auto py-4 px-6;
+  }
+  pre [data-line] {
+    @apply px-2;
+  }
 }
+
+@keyframes terminal-glitch {
+  0% {
+    opacity: 1;
+    filter: brightness(1) contrast(1) hue-rotate(0deg) saturate(1) blur(0px);
+  }
+  10% {
+    opacity: 0.8;
+    filter: brightness(1.1) contrast(1.1) hue-rotate(270deg) saturate(1.7) blur(0.2px);
+  }
+  20% {
+    opacity: 0.7;
+    filter: brightness(0.9) contrast(1.15) hue-rotate(270deg) saturate(2) blur(0.3px);
+    clip-path: polygon(0 0, 100% 0, 100% 3%, 0 3%);
+  }
+  30% {
+    opacity: 0.85;
+    filter: brightness(1.15) contrast(1.2) hue-rotate(270deg) saturate(1.8) blur(0.2px);
+  }
+  40% {
+    opacity: 0.75;
+    filter: brightness(0.95) contrast(1.1) hue-rotate(270deg) saturate(1.9) blur(0.25px);
+  }
+  50% {
+    opacity: 0.9;
+    filter: brightness(1.2) contrast(1.15) hue-rotate(270deg) saturate(1.7) blur(0.2px);
+  }
+  60% {
+    opacity: 0.7;
+    filter: brightness(0.9) contrast(1.2) hue-rotate(270deg) saturate(2) blur(0.3px);
+  }
+  70% {
+    opacity: 0.85;
+    filter: brightness(1.1) contrast(1.1) hue-rotate(270deg) saturate(1.8) blur(0.2px);
+  }
+  80% {
+    opacity: 0.8;
+    filter: brightness(0.95) contrast(1.15) hue-rotate(270deg) saturate(1.9) blur(0.25px);
+    clip-path: polygon(0 97%, 100% 97%, 100% 100%, 0 100%);
+  }
+  100% {
+    opacity: 1;
+    filter: brightness(1) contrast(1) hue-rotate(0deg) saturate(1) blur(0px);
+    clip-path: none;
+  }
+}
+
+::view-transition-old(root) {
+  animation: terminal-glitch 500ms cubic-bezier(0.33, 0, 0.67, 1) reverse;
+}
+
+::view-transition-new(root) {
+  animation: terminal-glitch 500ms cubic-bezier(0.33, 0, 0.67, 1);
 }
