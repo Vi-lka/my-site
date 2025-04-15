@@ -1,8 +1,9 @@
-import { createHighlighter, Highlighter } from 'shiki';
+import { createHighlighter, type Highlighter } from 'shiki';
 
 let highlighter: Highlighter | null = null;
 
 export async function highlightCode(code: string, lang: string, theme: string) {
+  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
   if (!highlighter) {
     highlighter = await createHighlighter({
       themes: ['github-light', 'github-dark'],

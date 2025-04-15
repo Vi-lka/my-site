@@ -1,7 +1,7 @@
 import PageLayout from "@/components/content/page-layout";
 import { TypingAnimation } from "@/components/magicui/typing-animation";
 import GlitchText from "@/components/special/glitch-text";
-import { Locale } from "@/i18n/config";
+import { type Locale } from "@/i18n/config";
 import { SKILLS } from "@/lib/consts";
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -10,6 +10,7 @@ import ViewTransition from '@/components/ViewTransition';
 import { cn } from "@/lib/utils";
 import { isMobile } from "react-device-detect";
 import GoBackButton from "@/components/special/go-back-button";
+import PageClient from "./page-client";
 
 export const dynamic = 'force-static'
 
@@ -58,10 +59,11 @@ export default function Page({
           </GlitchText>
         </div>
         <div className='w-full'>
-          <TypingAnimation startOnView delay={400} duration={20} className="text-xl md:text-2xl">
-            &gt; pnpm add skills
+          <TypingAnimation startOnView delay={400} duration={10} className="text-xl md:text-2xl">
+            &gt; pnpm dlx typescript init
           </TypingAnimation>
         </div>
+        <PageClient skill={currentSkill} />
       </section>
     </PageLayout>
   )

@@ -134,5 +134,24 @@ export const SKILLS_EXAMPLES = {
       // Выводим итоговую статистику
       app.printPerformanceSummary();
     })();
-  `
+  `,
+  react: ``,
+  next: ``,
+  tailwind: ``,
+  drizzle: ``,
+  prisma: ``,
+  restApi: ``,
+  graphQL: ``,
+  trpc: ``,
+  webSocket: ``,
+  tanstack: ``,
+  reactRouter: ``,
+  zustand: ``,
+  redux: ``,
+  jotai: ``,
+  nuqs: ``,
+  threeJs: ``,
+  spring: ``,
+  motion: ``,
+  docker: ``,
 }

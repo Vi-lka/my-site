@@ -3,10 +3,10 @@
 import * as React from "react";
 import { useTheme } from "next-themes";
 
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button, type buttonVariants } from "@/components/ui/button";
 import { Moon, Sun } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { VariantProps } from "class-variance-authority";
+import { type VariantProps } from "class-variance-authority";
 
 export function ModeToggle({
   variant = "outline",

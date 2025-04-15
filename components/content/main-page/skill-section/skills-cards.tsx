@@ -1,10 +1,10 @@
 "use client"
 
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import React, { JSX } from 'react'
+import React, { type JSX } from 'react'
 import { Icons } from './icons'
 import { cn } from '@/lib/utils'
-import { motion, Variants } from 'motion/react'
+import { motion, type Variants } from 'motion/react'
 import { SKILLS } from '@/lib/consts'
 import { Link } from 'next-view-transitions'
 import ViewTransition from "@/components/ViewTransition"

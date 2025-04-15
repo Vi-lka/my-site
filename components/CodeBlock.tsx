@@ -3,44 +3,57 @@
 import { highlightCode } from '@/lib/highlight';
 import { cn } from '@/lib/utils';
 import { useTheme } from 'next-themes';
-import { HTMLAttributes, useEffect, useState } from 'react';
+import { type HTMLAttributes, useEffect, useState } from 'react';
+import { ScrollArea, ScrollBar } from './ui/scroll-area';
 
 interface CodeBlockProps extends HTMLAttributes<HTMLPreElement> {
   code?: string;
   language?: string;
+  classNameCode?: string;
+  classNameViewport?: string;
 }
 
-export function CodeBlock({ code, language = 'text', className, ...props }: CodeBlockProps) {
+export function CodeBlock({ 
+  code, 
+  language = 'text', 
+  className, 
+  classNameCode, 
+  classNameViewport,
+  ...props 
+}: CodeBlockProps) {
   const { resolvedTheme } = useTheme();
   const [highlightedCode, setHighlightedCode] = useState('');
 
   useEffect(() => {
     if (code) {
-      highlightCode(code, language, resolvedTheme || 'dark').then((html) => {
+      void highlightCode(code, language, resolvedTheme ?? 'dark').then((html) => {
         setHighlightedCode(html);
       });
     }
   }, [code, language, resolvedTheme]);
 
   return (
-    <div className="relative">
+    <div className="relative w-full">
       <pre
         className={cn(
-          'rounded bg-muted p-4 overflow-x-auto text-sm font-mono relative',
+          'rounded bg-muted p-0 overflow-x-auto text-sm font-mono relative',
           className
         )}
         {...props}
       >
         {language && (
-          <span className="absolute top-2 right-2 text-xs font-medium bg-background text-foreground px-2 py-1 rounded">
-            {language.toUpperCase()}
+          <span className="absolute top-2 right-2 text-xs font-medium bg-background border text-foreground uppercase px-2 py-1 rounded z-1">
+            {language}
           </span>
         )}
-        {code ? (
-          <div dangerouslySetInnerHTML={{ __html: highlightedCode }} />
-        ) : (
-          props.children
-        )}
+        <ScrollArea className={cn("z-0", classNameCode)} classNameViewport={classNameViewport}>
+          {code ? (
+            <div dangerouslySetInnerHTML={{ __html: highlightedCode }} />
+          ) : (
+            props.children
+          )}
+          <ScrollBar orientation="horizontal" />
+        </ScrollArea>
       </pre>
     </div>
   );

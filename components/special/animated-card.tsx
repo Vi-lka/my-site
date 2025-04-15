@@ -3,7 +3,7 @@
 import React from 'react'
 import { Card } from '../ui/card'
 import { cn } from '@/lib/utils'
-import { motion, MotionProps, Variants } from 'motion/react';
+import { motion, type MotionProps, type Variants } from 'motion/react';
 interface TextAnimateProps extends MotionProps {
   /**
    * The text content to animate

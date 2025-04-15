@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { motion, MotionProps, Variants } from "motion/react";
+import { motion, type MotionProps, type Variants } from "motion/react";
 
 interface TypingAnimationProps extends MotionProps {
   children: string;

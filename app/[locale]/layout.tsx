@@ -6,7 +6,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
 import Providers from "@/components/providers";
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { Locale } from '@/i18n/config';
+import { type Locale } from '@/i18n/config';
 import { ViewTransitions } from 'next-view-transitions'
 // import { ReactScan } from "@/components/providers/react-scan";
 

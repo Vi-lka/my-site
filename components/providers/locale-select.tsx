@@ -1,14 +1,14 @@
 "use client"
 
-import { VariantProps } from 'class-variance-authority'
+import { type VariantProps } from 'class-variance-authority'
 import React, { useTransition } from 'react'
-import { Button, buttonVariants } from '../ui/button'
+import { Button, type buttonVariants } from '../ui/button'
 import { Select, SelectContent, SelectItem } from '../ui/select'
 import { cn } from '@/lib/utils'
 import { SelectTrigger } from '@radix-ui/react-select'
 import { Languages } from 'lucide-react'
 import { useLocale } from 'next-intl'
-import { Locale, locales } from '@/i18n/config'
+import { type Locale, locales } from '@/i18n/config'
 import {usePathname, useRouter} from '@/i18n/navigation';
 import { useParams } from 'next/navigation'
 

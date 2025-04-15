@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 import createNextIntlPlugin from 'next-intl/plugin';
 import nextMDX from '@next/mdx';
-import rehypePrettyCode, { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code';
+import rehypePrettyCode, { type Options as RehypePrettyCodeOptions } from 'rehype-pretty-code';
 
 const rehypePrettyCodeOptions: RehypePrettyCodeOptions = {
   theme: { dark: 'github-dark', light: 'github-light' },
