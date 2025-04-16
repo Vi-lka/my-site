@@ -37,103 +37,111 @@ export const SKILLS_TERMINAL = [
 
 export const SKILLS_EXAMPLES = {
   typescript: `
-    // Декоратор для замера производительности
-    function LogPerformance(thresholdMs: number = 100) {
-      return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
-        const originalMethod = descriptor.value;
-        descriptor.value = async function (...args: any[]) {
-          const start = performance.now();
-          const result = await originalMethod.apply(this, args);
-          const duration = performance.now() - start;
-          const color = duration > thresholdMs ? '\\x1b[31m' : '\\x1b[32m'; // Красный для медленных, зеленый для быстрых
-          console.log(
-            \`\${color}[PERF] \${propertyKey} took \${duration.toFixed(2)}ms (args: \${JSON.stringify(args)})\${'\x1b[0m'}\`
-          );
-          return result;
-        };
-        return descriptor;
-      };
-    }
+    // Constants for thresholds
+    const THRESHOLDS = {
+      fetchData: 200,
+      processData: 150,
+    } as const;
 
-    // Типобезопасное хранилище логов
-    type PerformanceLog = {
+    // Type for performance logs
+    type PerfLog = {
       method: string;
       duration: number;
-      timestamp: string;
+      args: unknown[];
+      thresholdMs: number;
     };
 
-    type LogStore<T extends PerformanceLog> = {
-      logs: T[];
-      addLog: (log: T) => void;
-      printSummary: () => void;
-    };
+    // Type for async functions
+    type AsyncFn<T, U> = (...args: T[]) => Promise<U>;
 
-    // Функция создания хранилища логов
-    function createLogStore(): LogStore<PerformanceLog> {
-      const logs: PerformanceLog[] = [];
-      return {
-        logs,
-        addLog(log: PerformanceLog) {
-          logs.push(log);
-        },
-        printSummary() {
-          const avgDuration = logs.reduce((sum, log) => sum + log.duration, 0) / logs.length || 0;
-          const slowLogs = logs.filter((log) => log.duration > 100).length;
-          console.log(
-            \`\\x1b[36m[SUMMARY] Total logs: \${logs.length}, Avg duration: \${avgDuration.toFixed(2)}ms, Slow operations: \${slowLogs}\\x1b[0m\`
-          );
-        },
+    // Helper for formatting log entries
+    function formatLog(log: PerfLog): string {
+      const color = log.duration > log.thresholdMs ? '\\x1b[31m' : '\\x1b[32m';
+      return \`\${color}[PERF] \${log.method} took \${log.duration.toFixed(2)}ms (args: \${JSON.stringify(log.args)})\\x1b[0m\`
+    }
+      
+    // Wrapper for performance logging
+    function withPerformanceLog<T, U>(
+      fn: AsyncFn<T, U>,
+      methodName: string,
+      thresholdMs: number
+    ) {
+      return async function (...args: T[]): Promise<{ result: U; log: PerfLog }> {
+        const start = performance.now();
+        const result = await fn(...args);
+        const duration = performance.now() - start;
+        const log: PerfLog = { method: methodName, duration, args, thresholdMs };
+        console.log(formatLog(log));
+        return { result, log };
       };
     }
-            
-    // Пример сервиса веб-приложения
-    class WebAppService {
-      private logStore = createLogStore();
-            
-      @LogPerformance(100)
-      async fetchUserData(userId: number): Promise<{ id: number; name: string }> {
-        // Симуляция задержки
-        await new Promise((resolve) => setTimeout(resolve, Math.random() * 200));
-        const log: PerformanceLog = {
-          method: \`fetchUserData(\${userId})\`,
-          duration: performance.now(),
-          timestamp: new Date().toISOString(),
-        };
-        this.logStore.addLog(log);
-        return { id: userId, name: \`User_\${userId}\` };
+      
+    // Service for data processing
+    class ApiService {
+      private logs: PerfLog[] = [];
+      
+      // Collect log from method result
+      private collectLog<T>(wrapped: { result: T; log: PerfLog }): T {
+        this.logs.push(wrapped.log);
+        return wrapped.result;
       }
-            
-      @LogPerformance(50)
-      async processUserData(user: { id: number; name: string }): Promise<string> {
-        // Симуляция быстрой обработки
-        await new Promise((resolve) => setTimeout(resolve, Math.random() * 80));
-        const log: PerformanceLog = {
-          method: \`processUserData(\${user.id})\`,
-          duration: performance.now(),
-          timestamp: new Date().toISOString(),
-        };
-        this.logStore.addLog(log);
-        return \`Processed: \${user.name}\`;
+      
+      // Output all logs and summary in one console output
+      printAllLogs(): string[] {
+        const lines = ['\\x1b[1m[PERFORMANCE REPORT]\\x1b[0m'];
+        this.logs.forEach(log => lines.push(formatLog(log)));
+        const avg = this.logs.reduce((sum, log) => sum + log.duration, 0) / this.logs.length || 0;
+        const slow = this.logs.filter(log => log.duration > log.thresholdMs).length;
+        lines.push(
+          \`\\x1b[36m[SUMMARY] Logs: \${this.logs.length}, Avg: \${avg.toFixed(2)}ms, Slow: \${slow}\\x1b[0m\`
+        );
+        console.log(lines.join('\\n'));
+        return lines
       }
-            
-      printPerformanceSummary() {
-        this.logStore.printSummary();
+          
+      private runFetchData = withPerformanceLog(
+        async (id: number): Promise<{ id: number; data: string }> => {
+          await new Promise(resolve => setTimeout(resolve, Math.random() * 250));
+          return { id, data: \`Data_\${id}\` };
+        },
+        'fetchData',
+        THRESHOLDS.fetchData
+      );
+          
+      private runProcessData = withPerformanceLog(
+        async (data: { id: number; data: string }): Promise<string> => {
+          await new Promise(resolve => setTimeout(resolve, Math.random() * 200));
+          return \`Processed: \${data.data}\`;
+        },
+        'processData',
+        THRESHOLDS.processData
+      );
+          
+      // Public API with log collection
+      async fetchData(id: number) {
+        return this.collectLog(await this.runFetchData(id));
+      }
+          
+      async processData(data: { id: number; data: string }) {
+        return this.collectLog(await this.runProcessData(data));
       }
     }
-            
-    // Использование
-    (async () => {
-      const app = new WebAppService();
-            
-      // Выполняем несколько операций
-      const user1 = await app.fetchUserData(1);
-      await app.processUserData(user1);
-      const user2 = await app.fetchUserData(2);
-      await app.processUserData(user2);
-            
-      // Выводим итоговую статистику
-      app.printPerformanceSummary();
-    })();
+          
+    export const apiService = new ApiService();
+    
+    // Usage
+    const runDemo = async () => {
+      await Promise.all(
+        Array.from({ length: 10 }, (_, i) => i + 1).map(async id => {
+          const data = await apiService.fetchData(id);
+          await apiService.processData(data);
+        })
+      );
+      const logLines = apiService.printAllLogs();
+      return logLines
+    };
+
+    await runDemo();
   `,
   react: ``,
   next: ``,

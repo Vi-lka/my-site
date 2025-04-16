@@ -42,11 +42,18 @@ export function CodeBlock({
         {...props}
       >
         {language && (
-          <span className="absolute top-2 right-2 text-xs font-medium bg-background border text-foreground uppercase px-2 py-1 rounded z-1">
+          <span className="absolute top-2 right-2 text-xs font-medium bg-background dark:border text-foreground uppercase px-2 py-1 rounded z-50">
             {language}
           </span>
         )}
-        <ScrollArea className={cn("z-0", classNameCode)} classNameViewport={classNameViewport}>
+        <ScrollArea 
+          type="always" 
+          className={cn(
+            "dark:[&_pre]:!bg-transparent [&_pre]:!bg-background/70 [&_pre]:!pl-0 [&_pre]:!pr-8 rounded z-0", 
+            classNameCode
+          )} 
+          classNameViewport={classNameViewport}
+        >
           {code ? (
             <div dangerouslySetInnerHTML={{ __html: highlightedCode }} />
           ) : (

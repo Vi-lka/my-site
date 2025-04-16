@@ -144,7 +144,7 @@ export default function HeroSection() {
               className="text-green-500"
               disabled={hasAnimatedTerminal}
               onAnimationComplete={() => {
-                if (!hasAnimatedTerminal) {
+                if (!hasAnimatedTerminal && index === SKILLS_TERMINAL.length - 1) {
                   sessionStorage.setItem('hasSeenTerminalAnimation', 'true');
                   setHasAnimatedTerminal(true);
                 }

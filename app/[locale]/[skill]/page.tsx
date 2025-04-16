@@ -60,7 +60,7 @@ export default function Page({
         </div>
         <div className='w-full'>
           <TypingAnimation startOnView delay={400} duration={10} className="text-xl md:text-2xl">
-            &gt; pnpm dlx typescript init
+            &gt; pnpm dlx typescript demo
           </TypingAnimation>
         </div>
         <PageClient skill={currentSkill} />

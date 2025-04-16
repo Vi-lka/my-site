@@ -96,14 +96,15 @@ export const TypingAnimation = ({
 interface TerminalProps {
   children: React.ReactNode;
   className?: string;
+  classNamePre?: string;
   classNameBar?: string;
 }
 
-export const Terminal = ({ children, className, classNameBar }: TerminalProps) => {
+export const Terminal = ({ children, className, classNamePre, classNameBar }: TerminalProps) => {
   return (
     <div
       className={cn(
-        "z-0 h-full max-h-[400px] w-full max-w-lg rounded-xl border border-border bg-background",
+        "h-full max-h-[400px] w-full max-w-lg rounded-xl border border-border bg-background",
         className,
       )}
     >
@@ -114,7 +115,7 @@ export const Terminal = ({ children, className, classNameBar }: TerminalProps) =
           <div className="h-2 w-2 rounded-full bg-green-500"></div>
         </div>
       </div>
-      <pre className="p-4">
+      <pre className={cn("p-4", classNamePre)}>
         <code className="grid gap-y-1 overflow-auto">{children}</code>
       </pre>
     </div>
