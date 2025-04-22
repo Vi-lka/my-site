@@ -6,9 +6,9 @@ import { Icons } from './icons'
 import { cn } from '@/lib/utils'
 import { motion, type Variants } from 'motion/react'
 import { SKILLS } from '@/lib/consts'
-import { Link } from 'next-view-transitions'
+// import { Link } from 'next-view-transitions'
 import ViewTransition from "@/components/ViewTransition"
-import { useLocale } from 'next-intl'
+// import { useLocale } from 'next-intl'
 
 type SkillsItemT = {
   id: string,
@@ -29,7 +29,7 @@ export default function SkillsCards({
   delay?: number
   className?: string
 }) {
-  const locale = useLocale()
+  // const locale = useLocale()
   const [hasAnimated, setHasAnimated] = React.useState(false);
 
   const delayAll = delay ? delay/1000 : 0
@@ -104,11 +104,12 @@ export default function SkillsCards({
             key={key}
             variants={itemVariants}
           >
-            <Link href={`/${locale}/${item.id}`} passHref>
+            {/* <Link href={`/${locale}/${item.id}`} passHref> */}
               <Card className="flex-row min-h-32 p-0 border-none">
                 <CardHeader className={cn(
                   'group flex-1 pr-0 py-6 w-full rounded-md border transition-all z-20',
-                  'dark:hover:bg-background/70 hover:bg-foreground/5 dark:border-border border-border/30 dark:hover:border-foreground/30 hover:border-border/70'
+                  'dark:border-border border-border/30',
+                  // 'dark:hover:bg-background/70 hover:bg-foreground/5 dark:hover:border-foreground/30 hover:border-border/70'
                 )}>
                   <CardTitle>
                     <item.icon className='md:size-8 size-6' />
@@ -128,7 +129,7 @@ export default function SkillsCards({
                   </ViewTransition>
                 </CardHeader>
               </Card>
-            </Link>
+            {/* </Link> */}
           </motion.div>
         )
       })}

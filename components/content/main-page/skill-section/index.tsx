@@ -12,7 +12,7 @@ export default function SkillsSection({
 }) {
   return (
     <section id="skills" className={cn(
-      'relative w-full min-h-screen flex flex-col gap-6 items-center justify-center px-4 py-12 overflow-hidden', 
+      'relative w-full flex flex-col gap-6 items-center justify-center px-4 py-12 overflow-hidden', 
       isMobile ? "px-4" : "md:px-28",
       className
     )}>

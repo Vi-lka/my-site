@@ -29,7 +29,15 @@
     },
     "skills": {
       "title": "Skills",
-      "terminal": "Skills atom initialized"
+      "terminal": "Skills initialized"
+    },
+    "projects": {
+      "title": "Projects",
+      "terminal": "Projects initialized",
+      "gms": {
+        "title": "Fields monitoring system.",
+        "description": "A web application with role-based authorization and a custom interactive map on Konva.js. Displays fields with mining data. Supports zoom, filters, table export, and change history for admins."
+      }
     }
   }
 }
