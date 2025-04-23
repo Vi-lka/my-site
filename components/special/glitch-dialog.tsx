@@ -37,18 +37,18 @@ export default function GlitchDialog({
     <Dialog open={open} onOpenChange={handleOpen}>
       <DialogTrigger className={cn(
         "cursor-pointer w-fit h-fit",
-        (open && animate) && "animate-terminal-glitch-dialog",
-        (!open && animate) && "animate-terminal-glitch-dialog !direction-reverse"
+        (open && animate) && "animate-terminal-glitch-dialog !direction-reverse",
+        (!open && animate) && "animate-terminal-glitch-dialog"
       )}>
         {trigger}
       </DialogTrigger>
       <DialogContent className={cn(
         className, 
-        (open && animate) && "animate-terminal-glitch-dialog",
-        (!open && animate) && "animate-terminal-glitch-dialog !direction-reverse"
+        (open && animate) && "animate-terminal-glitch-dialog !direction-reverse",
+        (!open && animate) && "animate-terminal-glitch-dialog"
       )}>
-        <DialogHeader>
-          <DialogTitle className='text-center text-xs sm:text-sm'>{title}</DialogTitle>
+        <DialogHeader className='sr-only'>
+          <DialogTitle className='text-center text-xs sm:text-sm sr-only'>{title}</DialogTitle>
         </DialogHeader>
         <div className="px-4 md:px-0">
           {children}

@@ -37,6 +37,18 @@
       "gms": {
         "title": "Fields monitoring system.",
         "description": "A web application with role-based authorization and a custom interactive map on Konva.js. Displays fields with mining data. Supports zoom, filters, table export, and change history for admins."
+      },
+      "hi": {
+        "title": "Website of the Humanitarian Institute.",
+        "description": "The site uses Strapi CMS. Administrators can flexibly customize pages using custom components. A custom Rich Text Editor, a Calendar for the schedule of the educational process, a Calendar of events, and so on are implemented..."
+      },
+      "vas": {
+        "title": "Website \"VII (XXIII) Russian Archaeological Congress\"",
+        "description": "A site with role-based authorization, a custom admin panel, and a Strapi CMS. Implemented multi-stage authorization and uploading files to the CMS for users. Administrators in the custom admin panel can export users data, change the status of user requests, and send email newsletters."
+      },
+      "siberiana": {
+        "title": "Sibiriana - Cultural Heritage Aggregator",
+        "description": "Two web applications have been developed: the client and the admin panel. The Turborepo monorepository was used. Custom auth server on Keycloak, S3 Mini object storage, GraphQL API."
       }
     }
   }

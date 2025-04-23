@@ -100,10 +100,20 @@ export default function BgCanvas({
 
     // Animation loop
     let animationFrame: number
-    const animate = () => {
-      drawCyberpunkBackground()
-      animationFrame = requestAnimationFrame(animate)
-    }
+    let lastFrameTime = 0;
+    const frameInterval = 60;
+    const animate = (currentTime = 0) => {
+      if (currentTime - lastFrameTime >= frameInterval) {
+        drawCyberpunkBackground();
+        lastFrameTime = currentTime;
+      }
+      animationFrame = requestAnimationFrame(animate);
+    };
+
+    // const animate = () => {
+    //   drawCyberpunkBackground()
+    //   animationFrame = requestAnimationFrame(animate)
+    // }
 
     animate()
 

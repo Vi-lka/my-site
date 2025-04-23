@@ -8,6 +8,7 @@ import Providers from "@/components/providers";
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { type Locale } from '@/i18n/config';
 import { ViewTransitions } from 'next-view-transitions'
+import Script from 'next/script';
 // import { ReactScan } from "@/components/providers/react-scan";
 
 const geistSans = Geist({
@@ -58,6 +59,7 @@ export default async function LocaleLayout({
   return (
     <ViewTransitions>
       <html lang={locale} suppressHydrationWarning>
+        <Script crossOrigin='anonymous' src="//unpkg.com/react-scan/dist/auto.global.js"></Script>
         <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background`}>
           {/* <ReactScan /> */}
           <Providers>

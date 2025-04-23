@@ -8,9 +8,15 @@ interface MediaToggleProps {
   photoSrc: string;
   videoSrc: string;
   altText: string;
+  className?: string
 }
 
-const MediaToggle: React.FC<MediaToggleProps> = ({ photoSrc, videoSrc, altText }) => {
+const MediaToggle: React.FC<MediaToggleProps> = ({ 
+  photoSrc, 
+  videoSrc, 
+  altText,
+  className
+}) => {
   const [showVideo, setShowVideo] = useState(false);
   const [animate, setAnimate] = useState(false);
 
@@ -30,7 +36,7 @@ const MediaToggle: React.FC<MediaToggleProps> = ({ photoSrc, videoSrc, altText }
   }, [animate]);
 
   return (
-    <div className="relative w-full max-w-[600px] aspect-[17/9]">
+    <div className={cn("relative w-full max-w-[600px] aspect-[17/9]", className)}>
       {showVideo ? (
         <div className={cn("w-full h-full", animate && "animate-terminal-glitch")}>
           <video
@@ -41,7 +47,7 @@ const MediaToggle: React.FC<MediaToggleProps> = ({ photoSrc, videoSrc, altText }
             playsInline
             controls={false}
             poster={photoSrc}
-            className="w-full h-full object-cover rounded-md"
+            className="w-full h-full object-cover rounded-md cursor-pointer hover:p-1 hover:ring ring-offset-1 ring-ring ring-offset-background/30 dark:ring-offset-background transition-all"
           />
         </div>
       ) : (
