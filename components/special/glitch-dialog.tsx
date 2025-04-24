@@ -3,35 +3,45 @@
 import React, { useEffect, useState } from 'react'
 import { cn } from '@/lib/utils';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog';
+import { isMobile } from "react-device-detect";
+import { useMediaQuery } from '@/lib/hooks/useMediaQuery';
 
 export default function GlitchDialog({
   trigger,
   title,
   children,
-  className
+  className,
+  disabled
 }: {
   trigger: React.ReactNode,
   title: string,
   children: React.ReactNode,
   className?: string
+  disabled?: boolean
 }) {
+  const isDesktop = useMediaQuery("(width >= 64rem)"); // 1024px
+
   const [open, setOpen] = useState(false);
   const [animate, setAnimate] = useState(false);
 
   const handleOpen = (openV: boolean): void => {
-    setAnimate(true);
-    setOpen(openV);
+    if (!disabled) {
+      if (isDesktop && !isMobile) {
+        setAnimate(true);
+      }
+      setOpen(openV);  
+    }
   };
 
   // Reset animation state after it completes
   useEffect(() => {
-    if (animate) {
+    if (animate && isDesktop && !isMobile && !disabled) {
       const timer = setTimeout(() => {
         setAnimate(false);
       }, 300); // Match animation duration (300ms)
       return () => clearTimeout(timer);
     }
-  }, [animate]);
+  }, [animate, isDesktop, disabled]);
 
   return (
     <Dialog open={open} onOpenChange={handleOpen}>
@@ -44,7 +54,7 @@ export default function GlitchDialog({
       </DialogTrigger>
       <DialogContent className={cn(
         className,
-        "data-[state=open]:animate-none data-[state=closed]:animate-none data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-100 data-[state=open]:zoom-in-100",
+        (isDesktop && !isMobile && !disabled) && "data-[state=open]:animate-none data-[state=closed]:animate-none data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-100 data-[state=open]:zoom-in-100",
         (open && animate) && "animate-terminal-glitch-dialog",
         (!open && animate) && "animate-terminal-glitch-dialog !direction-reverse"
       )}>

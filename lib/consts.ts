@@ -1,3 +1,25 @@
+import { type StaticImageData } from "next/image";
+import gms_1 from "@/public/projects/gms/gms-1.webp";
+import gms_2 from "@/public/projects/gms/gms-2.webp";
+import gms_3 from "@/public/projects/gms/gms-3.webp";
+import gms_4 from "@/public/projects/gms/gms-4.webp";
+import gms_5 from "@/public/projects/gms/gms-5.webp";
+import gms_6 from "@/public/projects/gms/gms-6.webp";
+import hi_1 from "@/public/projects/hi/hi-1.webp";
+import hi_2 from "@/public/projects/hi/hi-2.webp";
+import hi_3 from "@/public/projects/hi/hi-3.webp";
+import hi_4 from "@/public/projects/hi/hi-4.webp";
+import vas_1 from "@/public/projects/vas/vas-1.webp";
+import vas_2 from "@/public/projects/vas/vas-2.webp";
+import vas_3 from "@/public/projects/vas/vas-3.webp";
+import vas_4 from "@/public/projects/vas/vas-4.webp";
+import siberiana_1 from "@/public/projects/siberiana/siberiana-1.webp";
+import siberiana_2 from "@/public/projects/siberiana/siberiana-2.webp";
+import siberiana_3 from "@/public/projects/siberiana/siberiana-3.webp";
+import siberiana_4 from "@/public/projects/siberiana/siberiana-4.webp";
+import pinchuga_1 from "@/public/projects/pinchuga/pinchuga-1.webp";
+import pinchuga_2 from "@/public/projects/pinchuga/pinchuga-2.webp";
+
 export const START_JOB_DATE = "2021-03-01"
 
 export const SKILLS = {
@@ -163,3 +185,31 @@ export const SKILLS_EXAMPLES = {
   motion: ``,
   docker: ``,
 }
+
+export type ImageT = {
+  id: `gms-${number}` | `hi-${number}` | `vas-${number}` | `siberiana-${number}` | `pinchuga-${number}`,
+  data: StaticImageData;
+}
+
+export const IMAGES: ImageT[] = [
+  {id: "gms-1", data: gms_1},
+  {id: "gms-2", data: gms_2},
+  {id: "gms-3", data: gms_3},
+  {id: "gms-4", data: gms_4},
+  {id: "gms-5", data: gms_5},
+  {id: "gms-6", data: gms_6},
+  {id: "hi-1", data: hi_1},
+  {id: "hi-2", data: hi_2},
+  {id: "hi-3", data: hi_3},
+  {id: "hi-4", data: hi_4},
+  {id: "vas-1", data: vas_1},
+  {id: "vas-2", data: vas_2},
+  {id: "vas-3", data: vas_3},
+  {id: "vas-4", data: vas_4},
+  {id: "siberiana-1", data: siberiana_1},
+  {id: "siberiana-2", data: siberiana_2},
+  {id: "siberiana-3", data: siberiana_3},
+  {id: "siberiana-4", data: siberiana_4},
+  {id: "pinchuga-1", data: pinchuga_1},
+  {id: "pinchuga-2", data: pinchuga_2},
+]
