@@ -46,7 +46,7 @@ export default function GlitchDialog({
   return (
     <Dialog open={open} onOpenChange={handleOpen}>
       <DialogTrigger className={cn(
-        "cursor-pointer w-fit h-fit",
+        "cursor-pointer w-full h-fit",
         (open && animate) && "animate-terminal-glitch-dialog",
         (!open && animate) && "animate-terminal-glitch-dialog !direction-reverse"
       )}>
