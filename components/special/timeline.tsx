@@ -6,7 +6,7 @@ import {
   useTransform,
   motion,
 } from "motion/react";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 interface TimelineEntry {
   title: string;
@@ -27,12 +27,60 @@ export const Timeline = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState(0);
 
-  useEffect(() => {
+  // Функция для обновления высоты
+  const updateHeight = useCallback(() => {
     if (ref.current) {
       const rect = ref.current.getBoundingClientRect();
-      setHeight(rect.height);
+      if (rect.height > 0) {
+        setHeight(rect.height);
+      }
     }
-  }, [ref]);
+  }, []);
+
+  // Используем ResizeObserver для отслеживания изменений размеров
+  useEffect(() => {
+    updateHeight(); // Начальное измерение
+
+    const resizeObserver = new ResizeObserver(() => {
+      updateHeight();
+    });
+
+    const element = ref.current
+
+    if (element) {
+      resizeObserver.observe(element);
+    }
+
+    return () => {
+      if (element) {
+        resizeObserver.unobserve(element);
+      }
+    };
+  }, [updateHeight]);
+
+  // Используем IntersectionObserver для измерения, когда элемент виден
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          updateHeight();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    const element = ref.current
+
+    if (element) {
+      observer.observe(element);
+    }
+
+    return () => {
+      if (element) {
+        observer.unobserve(element);
+      }
+    };
+  }, [updateHeight]);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,

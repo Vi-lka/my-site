@@ -2,8 +2,7 @@ import { cn } from '@/lib/utils'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
 import Title from './title'
-import { Timeline } from '@/components/special/timeline';
-import { projects } from './projects';
+import TimelineProjects from './timeline-projects';
 
 export default function ProjectsSection({
   className
@@ -17,9 +16,7 @@ export default function ProjectsSection({
       className
     )}>
       <Title />
-      <div className="relative w-full">
-        <Timeline data={projects} className='' />
-      </div>
+      <TimelineProjects />
     </section>
   )
 }
