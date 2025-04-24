@@ -40,15 +40,17 @@ const MediaToggle: React.FC<MediaToggleProps> = ({
       {showVideo ? (
         <div className={cn("w-full h-full", animate && "animate-terminal-glitch")}>
           <video
-            src={videoSrc}
             autoPlay
             loop
             muted
             playsInline
             controls={false}
             poster={photoSrc}
+            preload='auto'
             className="w-full h-full object-cover rounded-md cursor-pointer hover:p-1 hover:ring ring-offset-1 ring-ring ring-offset-background/30 dark:ring-offset-background transition-all"
-          />
+          >
+            <source src={videoSrc}/>
+          </video>
         </div>
       ) : (
         <div className={cn("w-full h-full", animate && "animate-terminal-glitch")}>

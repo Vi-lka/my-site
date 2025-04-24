@@ -8,18 +8,22 @@ export const projects: {
 }[] = [
   {
     title: "2024",
-    content: <Content key="gms" project="gms" length={6} />,
+    content: <Content project="gms" length={6} />,
   },
   {
     title: "2023",
     content: <>
-      <Content key="hi" project="hi" length={4} className="mb-12 md:mb-24" />
-      <Content key="vas" project="vas" length={4} />
+      <Content project="hi" length={4} className="mb-12 md:mb-24" />
+      <Content project="vas" length={4} />
     </>,
   },
   {
     title: "2022",
-    content: <Content key="siberiana" project="siberiana" length={4} />
+    content: <Content project="siberiana" length={4} />
+  },
+  {
+    title: "2021",
+    content: <Content project="pinchuga" length={2} />
   }
 ];
 
@@ -28,14 +32,14 @@ function Content({
   length,
   className
 }: {
-  project: "gms" | "hi" | "vas" | "siberiana";
+  project: "gms" | "hi" | "vas" | "siberiana" | "pinchuga";
   length: number;
   className?: string;
 }) {
   const t = useTranslations('HomePage.projects');
 
   return (
-    <div className={className}>
+    <div key={project} className={className}>
       <p className="mb-4 md:mb-8 text-sm md:text-base font-bold text-foreground">
         {t(`${project}.title`)}
       </p>
@@ -59,17 +63,19 @@ function Content({
           >
             <div className="w-full h-full aspect-[17/9]">
               <video
-                src={`/projects/${project}/${project}-${id}-comp.mp4`}
                 autoPlay
                 loop
                 muted
                 playsInline
                 controls 
-                controlsList="nodownload noremoteplayback noplaybackrate"
+                controlsList="nodownload noremoteplayback nofullscreen noplaybackrate"
                 disablePictureInPicture
                 poster={`/projects/${project}/${project}-${id}.webp`}
+                preload='auto'
                 className="w-full h-full object-cover aspect-video rounded-sm"
-              />
+              >
+                <source src={`/projects/${project}/${project}-${id}-comp.mp4`}/>
+              </video>
             </div>
           </GlitchDialog>
         ))}

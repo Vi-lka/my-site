@@ -49,6 +49,10 @@
       "siberiana": {
         "title": "Sibiriana - Cultural Heritage Aggregator",
         "description": "Two web applications have been developed: the client and the admin panel. The Turborepo monorepository was used. Custom auth server on Keycloak, S3 Mini object storage, GraphQL API."
+      },
+      "pinchuga": {
+        "title": "Point of the Past - 3D overview of finds from the \"Pinchuga-6\" archaeological complex",
+        "description": "The Three.js library was used for working with the camera and 3D models. Two versions of the site have been developed: a full 3D scene for powerful devices and an optimized version for weak ones. The site monitors the user's FPS and suggests switching to the light version if performance decreases. On mobile devices, the simplified version is always activated for maximum comfort."
       }
     }
   }
