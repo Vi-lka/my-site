@@ -3,6 +3,7 @@
 import { cn } from '@/lib/utils'
 import { useTheme } from 'next-themes'
 import React from 'react'
+import { isMobile } from 'react-device-detect';
 
 export default function BgCanvas({
   className,
@@ -101,7 +102,7 @@ export default function BgCanvas({
     // Animation loop
     let animationFrame: number
     let lastFrameTime = 0;
-    const frameInterval = 60;
+    const frameInterval = isMobile ? 300 : 60;
     const animate = (currentTime = 0) => {
       if (currentTime - lastFrameTime >= frameInterval) {
         drawCyberpunkBackground();
