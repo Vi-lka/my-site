@@ -2,6 +2,7 @@
 
 import { type IMAGES } from '@/lib/consts';
 import { cn, getStaticImage } from '@/lib/utils';
+import { LoaderCircle } from 'lucide-react';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
@@ -49,10 +50,11 @@ const MediaToggle: React.FC<MediaToggleProps> = ({
             playsInline
             controls={false}
             preload='auto'
-            className="relative w-full h-full object-cover rounded-md cursor-pointer group-hover:p-1 group-hover:ring ring-offset-1 ring-ring ring-offset-background/30 dark:ring-offset-background transition-all z-1"
+            className="relative w-full h-full object-cover rounded-md cursor-pointer group-hover:p-1 group-hover:ring ring-offset-1 ring-ring ring-offset-background/30 dark:ring-offset-background transition-all z-2"
           >
             <source src={videoSrc}/>
           </video>
+          <LoaderCircle className='animate-spin text-violet drop-shadow-xs absolute top-1/2 -translate-x-1/2 left-1/2 -translate-y-1/2 z-1' />
           <Image
             src={image}
             alt={altText}

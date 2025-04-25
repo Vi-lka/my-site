@@ -102,7 +102,7 @@ export default function BgCanvas({
     // Animation loop
     let animationFrame: number
     let lastFrameTime = 0;
-    const frameInterval = isMobile ? 300 : 60;
+    const frameInterval = isMobile ? 500 : 60;
     const animate = (currentTime = 0) => {
       if (currentTime - lastFrameTime >= frameInterval) {
         drawCyberpunkBackground();
