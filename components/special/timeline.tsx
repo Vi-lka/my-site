@@ -1,5 +1,6 @@
 "use client";
 
+import useIsSticky from "@/lib/hooks/useIsSticky";
 import { cn } from "@/lib/utils";
 import {
   useScroll,
@@ -120,25 +121,44 @@ export const Timeline = ({
 };
 
 function TimelineItem({ data }: { data: TimelineEntry }) {
+  const circleRef = useRef<HTMLHeadingElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
 
+  const isStickyCircle = useIsSticky(circleRef);
+  const isStickyTitle = useIsSticky(titleRef);
   return (
     <div
-      className={cn("flex justify-start pt-20 md:pt-40 first-of-type:md:pt-10 gap-3 lg:gap-10", data.className)}
+      className={cn("flex justify-start pt-20 md:pt-40 first-of-type:pt-6 first-of-type:md:pt-10 gap-3 lg:gap-10", data.className)}
     >
-      <div className="sticky flex flex-col md:flex-row items-center top-20 self-start lg:max-w-2xs md:max-w-52 md:w-full z-1">
+      <div 
+        ref={circleRef}
+        className="sticky flex flex-col md:flex-row items-center top-20 self-start lg:max-w-2xs md:max-w-52 md:w-full z-1"
+      >
         <div className={cn(
           "h-10 absolute left-0 w-10 rounded-full bg-background flex items-center justify-center",
         )}>
-          <div className="h-4 w-4 rounded-full bg-muted border p-2" />
+          <div className={cn(
+            "h-4 w-4 rounded-full bg-muted border p-2 transition-all", 
+            isStickyCircle ? "border-violet scale-125" : "border-border scale-100"
+          )}/>
         </div>
         <h3 className="hidden md:block text-xl md:pl-12 md:text-3xl lg:text-5xl font-bold text-foreground">
           {data.title}
         </h3>
       </div>
 
-      <div className="relative pt-1 pl-14 pr-4 md:pl-4 w-full z-20">
-        <h3 className="md:hidden block text-2xl mb-4 text-left font-bold text-foreground/80">
-          {data.title}
+      <div className="pt-1 pl-14 pr-4 md:pl-4 w-full z-20">
+        <h3 
+          ref={titleRef}
+          className="sticky top-20 md:hidden block text-2xl mb-4 text-left font-bold text-foreground/80"
+        >
+          <span className={cn(
+            "block w-fit",
+            isStickyTitle ? "rotate-90 -translate-x-12 translate-y-1" : "",
+            "transition-all"
+          )}>
+            {data.title}
+          </span>
         </h3>
         {data.content}
       </div>
