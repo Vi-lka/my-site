@@ -22,6 +22,25 @@ import pinchuga_2 from "@/public/projects/pinchuga/pinchuga-2.webp";
 
 export const START_JOB_DATE = "2021-03-01"
 
+export const CONTACTS = {
+  tel: {
+    title: "+7 933 325-85-65",
+    href: "tel:+79333258565"
+  },
+  email: {
+    title: "vitalya.permyakov155@gmail.com",
+    href: "mailto:vitalya.permyakov155@gmail.com"
+  },
+  github: {
+    title: "github.com/Vi-lka",
+    href: "https://github.com/Vi-lka"
+  },
+  telegram: {
+    title: "vi_lka7",
+    href: "https://t.me/vi_lka7"
+  }
+}
+
 export const SKILLS = {
   typescript: { id: "typescript", title: "TypeScript" },
   react: { id: "react", title: "React" },
