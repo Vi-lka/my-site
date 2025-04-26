@@ -6,6 +6,9 @@
   "Dock": {
     "home": "Home",
     "skills": "Skills",
+    "projects": "Projects",
+    "contact": "Contact",
+    "phone": "Phone",
     "send-email": "Send Email",
     "theme": "Theme",
     "locale": "Locale"

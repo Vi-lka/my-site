@@ -1,6 +1,6 @@
 "use client"
 
-import { BoxesIcon, HouseIcon } from 'lucide-react';
+import { BoxesIcon, BriefcaseIcon, HouseIcon } from 'lucide-react';
 import React from 'react'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip';
 import { Dock, DockIcon } from '../magicui/dock';
@@ -14,6 +14,7 @@ import { isMobile } from 'react-device-detect';
 import { useLocale, useTranslations } from 'next-intl';
 import LocaleSelect from './locale-select';
 import { Icons } from '../Icons';
+import { CONTACTS } from '@/lib/consts';
 
 export default function DockProvider({
   children,
@@ -28,19 +29,31 @@ export default function DockProvider({
     navbar: [
       { href: `/${locale}/#home`, icon: HouseIcon, label: t("home") },
       { href: `/${locale}/#skills`, icon: BoxesIcon, label: t("skills") },
+      { href: `/${locale}/#projects`, icon: BriefcaseIcon, label: t("projects") },
+      { href: `/${locale}/#contact`, icon: Icons.email, label: t("contact") },
     ],
     contact: {
       social: {
-        GitHub: {
-          name: "GitHub",
-          url: "https://github.com/Vi-lka",
-          icon: Icons.github,
+        phone: {
+          name: t("phone"),
+          url: CONTACTS.tel.href,
+          icon: Icons.phone
         },
         email: {
           name: t("send-email"),
-          url: "mailto:vitalya.permyakov155@gmail.com",
+          url: CONTACTS.email.href,
           icon: Icons.email,
         },
+        GitHub: {
+          name: "GitHub",
+          url: CONTACTS.github.href,
+          icon: Icons.github,
+        },
+        telegram: {
+          name: "Telegram",
+          url: CONTACTS.telegram.href,
+          icon: Icons.telegram,
+        }
       },
     },
   };
@@ -62,7 +75,7 @@ export default function DockProvider({
             >
               {DATA.navbar.map((item) => (
                 <DockIcon key={item.label}>
-                  <Tooltip delayDuration={300}>
+                  <Tooltip delayDuration={150}>
                     <TooltipTrigger asChild>
                       <Link
                         href={item.href}
@@ -83,7 +96,7 @@ export default function DockProvider({
                 </DockIcon>
               ))}
               
-              <Separator 
+              {/* <Separator 
                 orientation={isMobile ? "vertical" : "horizontal"} 
                 className={cn(
                   "bg-foreground/20",
@@ -112,7 +125,7 @@ export default function DockProvider({
                     </TooltipContent>
                   </Tooltip>
                 </DockIcon>
-              ))}
+              ))} */}
 
               <Separator 
                 orientation={isMobile ? "vertical" : "horizontal"}  

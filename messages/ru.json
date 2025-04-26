@@ -6,6 +6,9 @@
   "Dock": {
     "home": "Главная",
     "skills": "Навыки",
+    "projects": "Проекты",
+    "contact": "Контакты",
+    "phone": "Телефон",
     "send-email": "Отправить Email",
     "theme": "Тема",
     "locale": "Язык"
