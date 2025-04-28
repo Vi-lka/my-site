@@ -48,7 +48,7 @@ export default function HeroSection() {
           </div>
 
           {/* Digital readout effect */}
-          <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 text-violet lg:text-sm text-xs tracking-widest">
+          <div className="absolute w-full -bottom-4 left-1/2 transform -translate-x-1/2 text-violet lg:text-sm text-xs tracking-tight font-mono">
             {`SYS.${formatDate(currentDate, { day: "2-digit", month: "2-digit", year: "numeric" })}`}.V // WELCOME!
           </div>
         </div>
@@ -87,7 +87,7 @@ export default function HeroSection() {
               animation="fadeIn" 
               by="line" 
               as="p" 
-              className="text-base sm:text-lg md:text-xl"
+              className="text-sm sm:text-lg md:text-xl"
               initial={hasAnimatedHero ? 'show' : 'hidden'}
               onAnimationComplete={() => {
                 if (!hasAnimatedHero) {
@@ -117,23 +117,23 @@ export default function HeroSection() {
 
       <div className="absolute md:top-0 md:right-5 md:left-auto -top-8 left-2 dark:opacity-100 opacity-70 z-0">
         <Terminal className="text-sm w-96 bg-transparent border-none" classNameBar="opacity-0">
-          <TypingAnimation delay={700} duration={10} className="text-sm" disabled={hasAnimatedTerminal}>
+          <TypingAnimation delay={700} duration={10} className="font-mono text-sm" disabled={hasAnimatedTerminal}>
             &gt; pnpm dlx portfolio@latest init
           </TypingAnimation>
 
-          <AnimatedSpan delay={1000} className="text-green-500" disabled={hasAnimatedTerminal}>
+          <AnimatedSpan delay={1000} className="font-mono text-green-500" disabled={hasAnimatedTerminal}>
             <span>✔ {t("welcome")}</span>
           </AnimatedSpan>
 
-          <AnimatedSpan delay={1300} className="text-violet z-20" disabled={hasAnimatedTerminal}>
+          <AnimatedSpan delay={1300} className="font-mono text-violet z-20" disabled={hasAnimatedTerminal}>
             <span>- {t("iam.full")}</span>
           </AnimatedSpan>
 
-          <AnimatedSpan delay={1800} className="text-violet z-20" disabled={hasAnimatedTerminal}>
+          <AnimatedSpan delay={1800} className="font-mono text-violet z-20" disabled={hasAnimatedTerminal}>
             <span>- {t("experience.full", { yearsSinceStartJob })}</span>
           </AnimatedSpan>
 
-          <TypingAnimation duration={10} delay={2400} className="text-sm" disabled={hasAnimatedTerminal}>
+          <TypingAnimation duration={10} delay={2400} className="font-mono text-sm" disabled={hasAnimatedTerminal}>
             &gt; pnpm add skills
           </TypingAnimation>
 
@@ -141,7 +141,7 @@ export default function HeroSection() {
             <AnimatedSpan 
               key={index} 
               delay={2600 + index * 350} 
-              className="text-green-500"
+              className="font-mono text-green-500"
               disabled={hasAnimatedTerminal}
               onAnimationComplete={() => {
                 if (!hasAnimatedTerminal && index === SKILLS_TERMINAL.length - 1) {

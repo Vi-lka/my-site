@@ -142,7 +142,7 @@ function TimelineItem({ data }: { data: TimelineEntry }) {
             isStickyCircle ? "border-violet scale-125" : "border-border scale-100"
           )}/>
         </div>
-        <h3 className="hidden md:block text-xl md:pl-12 md:text-3xl lg:text-5xl font-bold text-foreground">
+        <h3 className="hidden md:block text-xl md:pl-12 md:text-3xl lg:text-5xl font-medium text-foreground font-mono">
           {data.title}
         </h3>
       </div>
@@ -150,7 +150,7 @@ function TimelineItem({ data }: { data: TimelineEntry }) {
       <div className="pt-1 pl-14 pr-4 md:pl-4 w-full z-20">
         <h3 
           ref={titleRef}
-          className="sticky top-20 md:hidden block text-2xl mb-4 text-left font-bold text-foreground/80"
+          className="sticky top-20 md:hidden block text-2xl mb-4 text-left font-medium text-foreground/80 font-mono"
         >
           <span className={cn(
             "block w-fit",

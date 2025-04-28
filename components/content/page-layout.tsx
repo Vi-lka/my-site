@@ -14,7 +14,7 @@ export default function PageLayout({
     <div className={cn("relative flex flex-col items-center justify-center", className)}>
       <BgCanvas className="fixed top-0 z-10" style={{ viewTransitionName: "no-transition-bg" }} />
       {/* HUD-like elements */}
-      <div className="fixed top-5 left-5 text-violet text-xs md:flex flex-col hidden z-5">
+      <div className="fixed top-5 left-5 text-violet text-xs md:flex flex-col hidden z-5 font-mono">
         <GlitchText className="text-violet" classNameGlitch="text-background/60" classNameGlitch2="text-violet">
           SYS.STATUS: ONLINE
         </GlitchText>
@@ -23,7 +23,7 @@ export default function PageLayout({
         </GlitchText>
       </div>
   
-      <div className="fixed bottom-5 right-5 text-violet text-xs text-right md:flex flex-col hidden z-5">
+      <div className="fixed bottom-5 right-5 text-violet text-xs text-right md:flex flex-col hidden z-5 font-mono">
         <GlitchText className="text-violet" classNameGlitch="text-background/60" classNameGlitch2="text-violet">
           USER: VITALY PERMYAKOV
         </GlitchText>

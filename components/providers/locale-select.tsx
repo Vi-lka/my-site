@@ -58,7 +58,7 @@ export default function LocaleSelect({
           <Languages />
         </Button>
       </SelectTrigger>
-      <SelectContent className='uppercase w-fit min-w-0 bg-transparent shadow-none'>
+      <SelectContent className='uppercase w-fit min-w-0 bg-transparent shadow-none font-mono'>
         {locales.map(lang => (
           <SelectItem key={lang} value={lang}>{lang}</SelectItem>
         ))}

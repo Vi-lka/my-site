@@ -90,7 +90,7 @@ export default function DockProvider({
                       </Link>
                     </TooltipTrigger>
                     <TooltipContent side={isMobile ? "top" : "right"}>
-                      <p>{item.label}</p>
+                      <p className='font-mono'>{item.label}</p>
                     </TooltipContent>
                   </Tooltip>
                 </DockIcon>
@@ -142,7 +142,7 @@ export default function DockProvider({
                     </div>
                   </TooltipTrigger>
                   <TooltipContent side={isMobile ? "top" : "right"}>
-                    <p>{t("theme")}</p>
+                    <p className='font-mono'>{t("theme")}</p>
                   </TooltipContent>
                 </Tooltip>
               </DockIcon>
@@ -154,7 +154,7 @@ export default function DockProvider({
                     </div>
                   </TooltipTrigger>
                   <TooltipContent side={isMobile ? "top" : "right"}>
-                    <p>{t("locale")}: <span className='uppercase'>{locale}</span></p>
+                    <p className='font-mono'>{t("locale")}: <span className='uppercase'>{locale}</span></p>
                   </TooltipContent>
                 </Tooltip>
               </DockIcon>
