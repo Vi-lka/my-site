@@ -49,7 +49,7 @@ export default function BgCanvas({
       staticCtx.fillRect(0, 0, staticCanvas.width, staticCanvas.height);
   
       // Lines
-      staticCtx.fillStyle = resolvedTheme === "dark" ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.15)";
+      staticCtx.fillStyle = resolvedTheme === "dark" ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.05)";
       for (let y = 0; y < staticCanvas.height; y += 4) {
         staticCtx.fillRect(0, y, staticCanvas.width, 1);
       }
