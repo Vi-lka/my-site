@@ -126,7 +126,7 @@ export default function DockProvider({
                       </Link>
                     </TooltipTrigger>
                     <TooltipContent side={isMobile ? "top" : "right"}>
-                      <p>{social.name}</p>
+                      <p className='font-mono'>{social.name}</p>
                     </TooltipContent>
                   </Tooltip>
                 </DockIcon>
