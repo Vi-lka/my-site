@@ -1,4 +1,4 @@
-import { MailIcon, PhoneIcon, Send } from "lucide-react";
+import { FileUser, MailIcon, PhoneIcon, Send } from "lucide-react";
 
 export type IconProps = React.HTMLAttributes<SVGElement>;
  
@@ -6,6 +6,7 @@ export const Icons = {
   phone: (props: IconProps) => <PhoneIcon {...props} />,
   email: (props: IconProps) => <MailIcon {...props} />,
   telegram: (props: IconProps) => <Send {...props} />,
+  cv: (props: IconProps) => <FileUser {...props} />,
   github: (props: IconProps) => (
     <svg viewBox="0 0 438.549 438.549" {...props}>
       <path

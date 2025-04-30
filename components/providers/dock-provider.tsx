@@ -14,7 +14,7 @@ import { isMobile } from 'react-device-detect';
 import { useLocale, useTranslations } from 'next-intl';
 import LocaleSelect from './locale-select';
 import { Icons } from '../Icons';
-import { CONTACTS } from '@/lib/consts';
+// import { CONTACTS } from '@/lib/consts';
 
 export default function DockProvider({
   children,
@@ -34,26 +34,31 @@ export default function DockProvider({
     ],
     contact: {
       social: {
-        phone: {
-          name: t("phone"),
-          url: CONTACTS.tel.href,
-          icon: Icons.phone
-        },
-        email: {
-          name: t("send-email"),
-          url: CONTACTS.email.href,
-          icon: Icons.email,
-        },
-        GitHub: {
-          name: "GitHub",
-          url: CONTACTS.github.href,
-          icon: Icons.github,
-        },
-        telegram: {
-          name: "Telegram",
-          url: CONTACTS.telegram.href,
-          icon: Icons.telegram,
+        // phone: {
+        //   name: t("phone"),
+        //   url: CONTACTS.tel.href,
+        //   icon: Icons.phone
+        // },
+        // email: {
+        //   name: t("send-email"),
+        //   url: CONTACTS.email.href,
+        //   icon: Icons.email,
+        // },
+        cv: {
+          name: t("cv"),
+          url: locale === "ru" ? "/CV.pdf" : "/Vitaly_Permyakov_CV.pdf",
+          icon: Icons.cv,
         }
+        // GitHub: {
+        //   name: "GitHub",
+        //   url: CONTACTS.github.href,
+        //   icon: Icons.github,
+        // },
+        // telegram: {
+        //   name: "Telegram",
+        //   url: CONTACTS.telegram.href,
+        //   icon: Icons.telegram,
+        // }
       },
     },
   };
@@ -96,7 +101,7 @@ export default function DockProvider({
                 </DockIcon>
               ))}
               
-              {/* <Separator 
+              <Separator 
                 orientation={isMobile ? "vertical" : "horizontal"} 
                 className={cn(
                   "bg-foreground/20",
@@ -125,7 +130,7 @@ export default function DockProvider({
                     </TooltipContent>
                   </Tooltip>
                 </DockIcon>
-              ))} */}
+              ))}
 
               <Separator 
                 orientation={isMobile ? "vertical" : "horizontal"}  

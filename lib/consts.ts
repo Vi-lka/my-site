@@ -38,7 +38,7 @@ export const CONTACTS = {
   telegram: {
     title: "vi_lka7",
     href: "https://t.me/vi_lka7"
-  }
+  },
 }
 
 export const SKILLS = {
