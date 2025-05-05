@@ -7,7 +7,9 @@ import "../globals.css";
 import Providers from "@/components/providers";
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { type Locale } from '@/i18n/config';
-import { ViewTransitions } from 'next-view-transitions'
+import { ViewTransitions } from 'next-view-transitions';
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from '@vercel/speed-insights/next';
 // import { ReactScan } from "@/components/providers/react-scan";
 
 const geistSans = Geist({
@@ -63,6 +65,8 @@ export default async function LocaleLayout({
           <Providers>
             {children}
           </Providers>
+          <Analytics />
+          <SpeedInsights />
         </body>
       </html>
     </ViewTransitions>
