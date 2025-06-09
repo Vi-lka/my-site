@@ -46,7 +46,7 @@ export default function DockProvider({
         // },
         cv: {
           name: t("cv"),
-          url: locale === "ru" ? "/CV.pdf" : "/Vitaly_Permyakov_CV.pdf",
+          url: "/Vitaly_Permyakov_CV.pdf",
           icon: Icons.cv,
         }
         // GitHub: {
